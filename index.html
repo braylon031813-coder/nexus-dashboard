@@ -194,52 +194,67 @@ $("showForm").addEventListener("submit", event => {
   renderAll();
 });
 
+
 async function loadNews() {
   $("status").textContent = "Fetching entertainment headlines...";
   $("newsList").replaceChildren();
 
-  const feed = "https://news.google.com/rss/search?q=entertainment+music+TV+shows&hl=en-US&gl=US&ceid=US:en";
-  const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feed);
+  const feed =
+    "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml";
+
+  const url =
+    "https://api.allorigins.win/raw?url=" +
+    encodeURIComponent(feed);
 
   try {
-    const response = await fetch(api);
-    if (!response.ok) throw new Error("News service unavailable");
-    const data = await response.json();
-    if (data.status !== "ok" || !data.items?.length)
-      throw new Error("No headlines returned");
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Feed unavailable");
 
-    data.items.slice(0, 10).forEach(story => {
+    const xml = new DOMParser().parseFromString(
+      await response.text(),
+      "text/xml"
+    );
+
+    if (xml.querySelector("parsererror"))
+      throw new Error("Invalid feed");
+
+    const stories = [...xml.querySelectorAll("item")].slice(0, 10);
+
+    if (!stories.length) throw new Error("No stories");
+
+    stories.forEach(story => {
+      const title = story.querySelector("title")?.textContent || "Read story";
+      const link = story.querySelector("link")?.textContent || "https://www.bbc.com/news/entertainment_and_arts";
+
       const article = document.createElement("article");
       article.className = "article";
 
-      const link = document.createElement("a");
-      link.href = story.link;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = story.title || "Read story";
+      const a = document.createElement("a");
+      a.href = link;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = title;
 
       const detail = document.createElement("p");
-      detail.textContent = [
-        story.author || "News source",
-        story.pubDate ? new Date(story.pubDate).toLocaleString() : ""
-      ].filter(Boolean).join(" · ");
+      detail.textContent = "BBC News · Entertainment & Arts";
 
-      article.append(link, detail);
+      article.append(a, detail);
       $("newsList").append(article);
     });
-    $("status").textContent = "Headlines loaded. Open a story to read more.";
+
+    $("status").textContent = "Latest headlines loaded.";
   } catch (error) {
-    $("status").textContent =
-      "Could not load headlines. The feed service may be unavailable.";
+    $("status").textContent = "The news feed is unavailable right now.";
     const link = document.createElement("a");
-    link.href = "https://news.google.com/";
+    link.href = "https://www.bbc.com/news/entertainment_and_arts";
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.textContent = "Open Google News instead";
+    link.textContent = "Read BBC Entertainment & Arts";
     link.style.color = "var(--cyan)";
     $("newsList").append(link);
   }
 }
+
 
 $("refresh").addEventListener("click", loadNews);
 renderAll();
