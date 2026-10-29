@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXUS | Personal Dashboard</title>
+<style>
+:root {
+  --bg: #080b12;
+  --panel: #111725;
+  --line: #26364b;
+  --cyan: #55e6ff;
+  --text: #edf5ff;
+  --muted: #91a2b9;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 24px;
+  background: radial-gradient(ellipse at top, #13243a, var(--bg) 60%);
+  color: var(--text);
+  font: 15px/1.5 Arial, sans-serif;
+}
+header {
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 16px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px; margin-bottom: 24px;
+}
+.logo { font-size: 27px; letter-spacing: 5px; font-weight: 800; }
+.logo span { color: var(--cyan); }
+.muted, small { color: var(--muted); }
+nav { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 24px; }
+nav a {
+  color: var(--cyan); text-decoration: none;
+  border: 1px solid var(--line); padding: 8px 12px;
+  border-radius: 9px;
+}
+h2 { font-size: 18px; margin-top: 0; }
+.layout {
+  display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 16px;
+}
+.panel {
+  background: rgba(17,23,37,.94);
+  border: 1px solid var(--line);
+  border-radius: 15px; padding: 20px; min-width: 0;
+}
+.wide { grid-column: 1 / -1; }
+input, select {
+  min-width: 0; width: 100%; padding: 11px;
+  color: var(--text); background: #090e18;
+  border: 1px solid var(--line); border-radius: 8px;
+  margin-bottom: 8px;
+}
+button {
+  border: 0; border-radius: 8px; padding: 10px 13px;
+  background: var(--cyan); color: #071019;
+  cursor: pointer; font-weight: bold;
+}
+.item, .article {
+  border-top: 1px solid var(--line);
+  padding: 12px 0; overflow-wrap: anywhere;
+}
+.item { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.item button { background: #26364b; color: white; flex-shrink: 0; }
+.article a { color: var(--cyan); text-decoration: none; }
+.article p { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+form { margin-bottom: 14px; }
+#status { color: var(--muted); font-size: 13px; }
+@media(max-width:650px) {
+  body { padding: 14px; }
+  .layout { grid-template-columns: 1fr; }
+  .wide { grid-column: auto; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="logo">NEXUS<span>.</span></div>
+    <div class="muted">YOUR PERSONAL MEDIA SYSTEM</div>
+  </div>
+  <div class="muted">MEDIA / CULTURE / NEWS</div>
+</header>
+
+<nav>
+  <a href="#music">Music</a>
+  <a href="#shows">Watchlist</a>
+  <a href="#news">Entertainment News</a>
+</nav>
+
+<main class="layout">
+  <section class="panel" id="music">
+    <h2>♫ Music Library</h2>
+    <p class="muted">Artists, songs, albums — your collection.</p>
+    <form id="musicForm">
+      <input id="song" placeholder="Song, album, or artist" required>
+      <button type="submit">+ Add to library</button>
+    </form>
+    <div id="musicList"></div>
+  </section>
+
+  <section class="panel" id="shows">
+    <h2>▣ Watchlist</h2>
+    <p class="muted">Shows and movies you want to track.</p>
+    <form id="showForm">
+      <input id="show" placeholder="Show or movie title" required>
+      <select id="showStatus">
+        <option>Want to watch</option>
+        <option>Watching</option>
+        <option>Finished</option>
+      </select>
+      <button type="submit">+ Add to watchlist</button>
+    </form>
+    <div id="showList"></div>
+  </section>
+
+  <section class="panel wide" id="news">
+    <h2>◉ Entertainment Intelligence</h2>
+    <p class="muted">Latest entertainment headlines and stories.</p>
+    <button id="refresh">Refresh headlines</button>
+    <p id="status">Loading headlines...</p>
+    <div id="newsList"></div>
+  </section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function read(key) {
+  try { return JSON.parse(localStorage.getItem(key) || "[]"); }
+  catch { return []; }
+}
+function save(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function renderList(key, target, formatter) {
+  const list = read(key);
+  $(target).replaceChildren();
+
+  if (!list.length) {
+    $(target).textContent = "Nothing here yet. Add your first entry.";
+    return;
+  }
+
+  list.forEach((entry, index) => {
+    const row = document.createElement("div");
+    row.className = "item";
+
+    const label = document.createElement("span");
+    label.textContent = formatter(entry);
+
+    const remove = document.createElement("button");
+    remove.textContent = "Remove";
+    remove.addEventListener("click", () => {
+      const current = read(key);
+      current.splice(index, 1);
+      save(key, current);
+      renderAll();
+    });
+
+    row.append(label, remove);
+    $(target).append(row);
+  });
+}
+
+function renderAll() {
+  renderList("nexusMusic", "musicList", x => x);
+  renderList("nexusShows", "showList",
+    x => x.title + " — " + x.status);
+}
+
+$("musicForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const title = $("song").value.trim();
+  if (!title) return;
+  const list = read("nexusMusic");
+  list.unshift(title);
+  save("nexusMusic", list);
+  $("song").value = "";
+  renderAll();
+});
+
+$("showForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const title = $("show").value.trim();
+  if (!title) return;
+  const list = read("nexusShows");
+  list.unshift({title, status: $("showStatus").value});
+  save("nexusShows", list);
+  $("show").value = "";
+  renderAll();
+});
+
+async function loadNews() {
+  $("status").textContent = "Fetching entertainment headlines...";
+  $("newsList").replaceChildren();
+
+  const feed = "https://news.google.com/rss/search?q=entertainment+music+TV+shows&hl=en-US&gl=US&ceid=US:en";
+  const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feed);
+
+  try {
+    const response = await fetch(api);
+    if (!response.ok) throw new Error("News service unavailable");
+    const data = await response.json();
+    if (data.status !== "ok" || !data.items?.length)
+      throw new Error("No headlines returned");
+
+    data.items.slice(0, 10).forEach(story => {
+      const article = document.createElement("article");
+      article.className = "article";
+
+      const link = document.createElement("a");
+      link.href = story.link;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = story.title || "Read story";
+
+      const detail = document.createElement("p");
+      detail.textContent = [
+        story.author || "News source",
+        story.pubDate ? new Date(story.pubDate).toLocaleString() : ""
+      ].filter(Boolean).join(" · ");
+
+      article.append(link, detail);
+      $("newsList").append(article);
+    });
+    $("status").textContent = "Headlines loaded. Open a story to read more.";
+  } catch (error) {
+    $("status").textContent =
+      "Could not load headlines. The feed service may be unavailable.";
+    const link = document.createElement("a");
+    link.href = "https://news.google.com/";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Open Google News instead";
+    link.style.color = "var(--cyan)";
+    $("newsList").append(link);
+  }
+}
+
+$("refresh").addEventListener("click", loadNews);
+renderAll();
+loadNews();
+</script>
+</body>
+</html>
