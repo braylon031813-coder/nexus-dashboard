@@ -4,982 +4,954 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080608">
-<title>NEXUS — Media System</title>
+<title>NEXUS</title>
 
 <style>
 :root {
-  --bg: #080608;
-  --panel: #110d12;
-  --panel2: #191019;
-  --pink: #ff4fae;
-  --pink2: #ff91cb;
-  --text: #fff5fb;
-  --muted: #a99aa7;
-  --border: #382337;
+  --bg: #070609;
+  --panel: #100d13;
+  --panel2: #17111b;
+  --pink: #ff4fa3;
+  --pink2: #ff85bd;
+  --text: #f7edf3;
+  --muted: #958994;
+  --border: rgba(255,79,163,.17);
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  padding: 25px;
+  background: var(--bg);
   color: var(--text);
-  background:
-    radial-gradient(ellipse at 15% 0%, #39102b 0%, transparent 35%),
-    radial-gradient(ellipse at 100% 50%, #210d20 0%, transparent 35%),
-    var(--bg);
-  font-family: Inter, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
-button, input, select { font: inherit; }
-button { cursor: pointer; }
-[hidden] { display: none !important; }
-
-.shell {
-  max-width: 1250px;
-  margin: auto;
+#void {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    420px circle at var(--x, 50%) var(--y, 50%),
+    rgba(255,79,163,.09),
+    transparent 70%
+  );
 }
 
-/* HEADER */
+header, main, footer { position: relative; z-index: 1; }
 
 header {
+  height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 0 22px;
+  padding: 0 6%;
   border-bottom: 1px solid var(--border);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-
-.brand-icon {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--pink);
-  border-radius: 12px;
-  color: var(--pink);
-  font-size: 23px;
-  font-weight: 900;
-  box-shadow: 0 0 25px #ff4fae22;
+  background: rgba(7,6,9,.88);
+  backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .logo {
-  font-size: 26px;
+  font-size: 25px;
   font-weight: 900;
-  letter-spacing: 6px;
+  letter-spacing: 4px;
+  color: var(--pink);
+  cursor: pointer;
 }
 
-.logo span { color: var(--pink); }
-
-.tagline {
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: var(--muted);
-}
-
-.header-label {
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-/* NAVIGATION */
+.logo span { color: white; }
 
 nav {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 9px;
-  padding: 20px 0 25px;
 }
 
 nav button {
-  background: #120d13;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 11px 18px;
-  color: #e7d8e4;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid transparent;
+  padding: 10px 15px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 13px;
   transition: .2s;
 }
 
 nav button:hover,
 nav button.active {
-  color: var(--pink2);
-  border-color: var(--pink);
-  background: #241323;
-  box-shadow: 0 0 20px #ff4fae15;
+  color: var(--pink);
+  background: rgba(255,79,163,.09);
+  border-color: var(--border);
 }
 
-/* HOME */
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 330px;
-  padding: 60px;
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  background: linear-gradient(115deg, #281126, #100c11 70%);
+main {
+  width: min(1150px, 90%);
+  margin: 45px auto 80px;
 }
 
-.hero:after {
-  content: "";
-  position: absolute;
-  right: -80px;
-  top: -130px;
-  width: 390px;
-  height: 390px;
-  border-radius: 50%;
-  border: 1px solid #ff4fae55;
-  box-shadow:
-    0 0 0 35px #ff4fae08,
-    0 0 0 75px #ff4fae06,
-    inset 0 0 80px #ff4fae15;
-}
+.page { display: none; animation: appear .3s ease; }
+.page.active { display: block; }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 650px;
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .eyebrow {
   color: var(--pink);
-  font-size: 11px;
   letter-spacing: 4px;
+  font-size: 11px;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
-.hero h1 {
-  font-size: clamp(42px, 7vw, 76px);
-  line-height: 1;
-  letter-spacing: -3px;
-  margin: 18px 0;
+h1 {
+  font-size: clamp(35px, 6vw, 65px);
+  margin: 12px 0;
+  letter-spacing: -2px;
 }
 
-.hero h1 span { color: var(--pink); }
+h2 { font-size: 25px; margin: 0 0 12px; }
+h3 { margin: 0 0 8px; }
 
-.hero p {
-  color: #c3b2c0;
-  max-width: 500px;
-  line-height: 1.8;
+p { color: var(--muted); line-height: 1.6; }
+
+.hero {
+  padding: 70px 45px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(255,79,163,.16), transparent 45%),
+    linear-gradient(135deg, #151019, #09070b);
+  margin-bottom: 35px;
 }
 
-.primary {
-  padding: 12px 19px;
-  border: 0;
-  border-radius: 9px;
-  background: var(--pink);
-  color: #180b14;
-  font-weight: 800;
+.hero p { max-width: 500px; }
+
+.pink { color: var(--pink); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 17px;
+  margin-top: 20px;
+}
+
+.card {
+  background: linear-gradient(145deg, var(--panel2), var(--panel));
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 22px;
   transition: .2s;
 }
 
-.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 25px #ff4fae55;
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,79,163,.55);
+  box-shadow: 0 10px 35px rgba(255,79,163,.07);
 }
+
+.click-card { cursor: pointer; }
+
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+
+.card p { font-size: 13px; margin-bottom: 0; }
 
 .section-heading {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 30px 0 15px;
-}
-
-.section-heading h2 {
-  font-size: 17px;
-  margin: 0;
-}
-
-.muted { color: var(--muted); }
-
-.quick-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
   gap: 15px;
-}
-
-.quick-card {
-  text-align: left;
-  color: var(--text);
-  background: linear-gradient(145deg, #1b111c, #0e0a0f);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 23px;
-  min-height: 155px;
-  transition: .2s;
-}
-
-.quick-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--pink);
-}
-
-.quick-card .symbol {
-  color: var(--pink);
-  font-size: 25px;
-  margin-bottom: 14px;
-}
-
-.quick-card strong {
-  display: block;
-  font-size: 16px;
-}
-
-.quick-card small {
-  display: block;
-  color: var(--muted);
-  margin-top: 7px;
-  line-height: 1.6;
-}
-
-/* PAGES */
-
-.page-title {
-  font-size: clamp(30px, 5vw, 43px);
-  margin: 10px 0;
-}
-
-.page-intro {
-  color: var(--muted);
+  flex-wrap: wrap;
   margin-bottom: 25px;
 }
 
-.panel {
-  background: rgba(17,13,18,.95);
-  border: 1px solid var(--border);
-  border-radius: 17px;
-  padding: 24px;
-}
+.section-heading p { margin: 5px 0 0; }
 
-.panel h2 { margin-top: 0; }
+.search-row {
+  display: flex;
+  gap: 10px;
+  margin: 25px 0;
+}
 
 input, select {
-  background: #0b080c;
+  background: #100d13;
   color: white;
-  border: 1px solid #493044;
+  border: 1px solid var(--border);
   border-radius: 9px;
-  padding: 12px;
+  padding: 14px;
   outline: none;
-}
-
-input:focus, select:focus {
-  border-color: var(--pink);
-  box-shadow: 0 0 0 3px #ff4fae18;
-}
-
-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 18px 0;
-}
-
-form input {
-  flex: 1;
-  min-width: 180px;
-}
-
-.status {
-  color: var(--muted);
-  font-size: 13px;
-  min-height: 20px;
-}
-
-/* RESULT CARDS */
-
-.results {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
-  gap: 14px;
-  margin-top: 18px;
-}
-
-.media-card {
-  text-align: left;
-  padding: 10px;
-  border-radius: 13px;
-  background: #0d090e;
-  border: 1px solid #342335;
-  color: white;
   min-width: 0;
+}
+
+input { flex: 1; }
+input:focus, select:focus { border-color: var(--pink); }
+
+button.action {
+  background: var(--pink);
+  color: #170812;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
   transition: .2s;
 }
 
-.media-card:hover {
-  border-color: var(--pink);
-  transform: translateY(-3px);
+button.action:hover {
+  background: var(--pink2);
+  transform: translateY(-1px);
 }
 
-.media-card img {
+button.secondary {
+  background: transparent;
+  color: var(--pink);
+  border: 1px solid var(--border);
+  padding: 9px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button.secondary:hover { background: rgba(255,79,163,.1); }
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.result-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 13px;
+  overflow: hidden;
+}
+
+.result-card img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 8px;
-  background: #211521;
+  background: #211824;
+  margin-bottom: 12px;
 }
 
-.media-card strong,
-.media-card span {
-  display: block;
-  margin-top: 8px;
-  overflow-wrap: anywhere;
+.result-card h3 {
+  font-size: 15px;
+  line-height: 1.4;
 }
 
-.media-card span {
-  color: var(--muted);
+.result-card p {
   font-size: 12px;
+  margin: 5px 0 12px;
 }
 
-.empty {
-  padding: 17px;
-  border: 1px dashed #493047;
-  border-radius: 12px;
-  color: var(--muted);
-  font-size: 13px;
-}
+.result-card button { width: 100%; }
 
-/* DETAILS */
-
-.detail {
-  display: grid;
-  grid-template-columns: minmax(150px, 270px) 1fr;
-  gap: 25px;
+.saved-item {
+  display: flex;
   align-items: center;
-  margin-top: 18px;
-  padding: 17px;
-  background: #0a070b;
+  gap: 14px;
+  padding: 13px;
+  background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
 }
 
-.detail img {
-  width: 100%;
-  border-radius: 10px;
-  aspect-ratio: 1;
+.saved-item img {
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
-.detail h1 {
-  color: var(--pink2);
-  font-size: clamp(25px, 4vw, 42px);
-  overflow-wrap: anywhere;
-}
+.saved-info { flex: 1; min-width: 0; }
+.saved-info h3 { font-size: 14px; }
+.saved-info p { font-size: 12px; margin: 4px 0 0; }
 
-.detail-actions {
+.saved-actions {
   display: flex;
+  gap: 7px;
   flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
+  justify-content: flex-end;
 }
 
-.secondary {
-  background: #191019;
-  color: white;
-  border: 1px solid var(--border);
-  padding: 10px 14px;
-  border-radius: 9px;
-}
-
-.secondary:hover { border-color: var(--pink); }
-
-.back { margin: 15px 0; }
-
-/* NEWS */
-
-.article {
-  padding: 17px 0;
-  border-top: 1px solid var(--border);
-}
-
-.article a {
-  color: var(--pink2);
-  font-weight: bold;
-  text-decoration: none;
-  line-height: 1.6;
-}
-
-.article a:hover { text-decoration: underline; }
-
-.article p {
+.empty {
+  padding: 35px;
+  text-align: center;
+  background: var(--panel);
+  border: 1px dashed var(--border);
+  border-radius: 13px;
   color: var(--muted);
-  font-size: 12px;
 }
 
-.news-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+.status {
+  color: var(--pink);
+  font-size: 11px;
+  margin-top: 5px;
 }
 
-/* FOOTER */
+.news-item {
+  padding: 20px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  margin-bottom: 13px;
+}
+
+.news-item a {
+  color: var(--pink);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.news-item a:hover { text-decoration: underline; }
 
 footer {
   text-align: center;
-  color: #766876;
-  padding: 35px 0 12px;
-  font-size: 10px;
-  letter-spacing: 3px;
+  color: #655965;
+  font-size: 11px;
+  padding: 30px;
+  border-top: 1px solid var(--border);
 }
 
-/* VOID CURSOR */
-
-#void {
-  position: fixed;
-  width: 290px;
-  height: 290px;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  pointer-events: none;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle,
-    rgba(0,0,0,.94) 0%,
-    rgba(0,0,0,.80) 27%,
-    rgba(10,0,9,.48) 48%,
-    rgba(255,40,160,.10) 65%,
-    transparent 73%
-  );
-  mix-blend-mode: multiply;
-  opacity: .85;
-  transition: opacity .2s;
-  will-change: transform;
-}
-
-@media (hover:none), (pointer:coarse) {
-  #void { display:none; }
-}
-
-@media (prefers-reduced-motion:reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
+@media(max-width: 650px) {
+  header {
+    height: auto;
+    padding: 17px 5%;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 13px;
   }
-  #void { display:none; }
-}
 
-@media(max-width:700px) {
-  body { padding: 15px; }
-  .hero { padding: 30px; min-height: 270px; }
-  .quick-grid { grid-template-columns: 1fr; }
-  .header-label { display:none; }
-  .detail { grid-template-columns: 1fr; }
-  .detail img { max-width: 250px; }
+  nav {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  nav button { white-space: nowrap; }
+  main { margin-top: 25px; }
+  .hero { padding: 40px 23px; }
+  .search-row { flex-direction: column; }
+  .saved-item { flex-wrap: wrap; }
+  .saved-actions { width: 100%; }
 }
 </style>
 </head>
 
 <body>
-
 <div id="void"></div>
 
-<div class="shell">
-
 <header>
-  <div class="brand">
-    <div class="brand-icon">N</div>
-    <div>
-      <div class="logo">NEXUS<span>.</span></div>
-      <div class="tagline">YOUR PERSONAL MEDIA SYSTEM</div>
-    </div>
-  </div>
-  <div class="header-label">MEDIA / CULTURE / DISCOVERY</div>
-</header>
+  <div class="logo" data-go="home">NEXUS<span>.</span></div>
 
-<nav>
-  <button class="active" data-page="home">⌂ Home</button>
-  <button data-page="music">♫ Music</button>
-  <button data-page="watchlist">▣ Watchlist</button>
-  <button data-page="news">◉ News</button>
-</nav>
+  <nav>
+    <button class="active" data-page="home">Home</button>
+    <button data-page="music">Music</button>
+    <button data-page="watchlist">Watchlist</button>
+    <button data-page="news">News</button>
+  </nav>
+</header>
 
 <main>
 
-<!-- HOME -->
-
-<section class="page" id="page-home">
-
-  <div class="hero">
-    <div class="hero-content">
-      <div class="eyebrow">WELCOME TO YOUR SPACE</div>
-      <h1>ENTER THE<br><span>NEXUS.</span></h1>
-      <p>
-        Your personal hub for music discovery, movies,
-        television, and entertainment news.
-        Everything in its own space.
-      </p>
-      <button class="primary" data-go="music">
-        Explore your media →
-      </button>
+  <!-- HOME -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <div class="eyebrow">Your personal universe</div>
+      <h1>Welcome to <span class="pink">NEXUS.</span></h1>
+      <p>Your personal space for music, movies, television, and the latest entertainment news. Everything in one place.</p>
+      <button class="action" data-go="music">Explore NEXUS</button>
     </div>
-  </div>
 
-  <div class="section-heading">
-    <h2>YOUR MODULES</h2>
-    <span class="muted">Choose your destination</span>
-  </div>
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Your dashboard</div>
+        <h2>Explore your universe.</h2>
+      </div>
+    </div>
 
-  <div class="quick-grid">
-    <button class="quick-card" data-go="music">
-      <div class="symbol">♫</div>
-      <strong>Music Library</strong>
-      <small>Discover songs and save your favorites.</small>
-    </button>
+    <div class="grid">
+      <div class="card click-card" data-go="music">
+        <div class="card-icon">♫</div>
+        <h2>Music</h2>
+        <p>Search songs, discover artists, and build your personal music library.</p>
+      </div>
 
-    <button class="quick-card" data-go="watchlist">
-      <div class="symbol">▣</div>
-      <strong>Watchlist</strong>
-      <small>Explore movies and television shows.</small>
-    </button>
+      <div class="card click-card" data-go="watchlist">
+        <div class="card-icon">▣</div>
+        <h2>Watchlist</h2>
+        <p>Find movies and shows. Keep track of what you want to watch.</p>
+      </div>
 
-    <button class="quick-card" data-go="news">
-      <div class="symbol">◉</div>
-      <strong>News Feed</strong>
-      <small>Keep up with entertainment headlines.</small>
-    </button>
-  </div>
+      <div class="card click-card" data-go="news">
+        <div class="card-icon">◈</div>
+        <h2>News</h2>
+        <p>Catch up on entertainment headlines and the latest stories.</p>
+      </div>
+    </div>
 
-</section>
+    <div class="grid">
+      <div class="card">
+        <div class="eyebrow">Your music</div>
+        <h2 id="home-music-count">0</h2>
+        <p>Saved songs</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Your watchlist</div>
+        <h2 id="home-watch-count">0</h2>
+        <p>Saved movies and shows</p>
+      </div>
+    </div>
+  </section>
 
-<!-- MUSIC -->
+  <!-- MUSIC -->
+  <section class="page" id="page-music">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Audio library</div>
+        <h1>Music<span class="pink">.</span></h1>
+        <p>Find music. Build your collection.</p>
+      </div>
+    </div>
 
-<section class="page" id="page-music" hidden>
+    <div class="search-row">
+      <input id="music-search" placeholder="Search songs or artists..." />
+      <button class="action" id="music-search-btn">Search</button>
+    </div>
 
-  <div class="eyebrow">MODULE 01 / AUDIO</div>
-  <h1 class="page-title">Music Library</h1>
-  <p class="page-intro">
-    Discover music, explore artists, and build your collection.
-  </p>
+    <div class="eyebrow">Search results</div>
+    <div id="music-results" class="results">
+      <div class="empty">Search for an artist or song to get started.</div>
+    </div>
 
-  <div class="panel">
-    <h2>♫ Music Discovery</h2>
-
-    <form id="musicForm">
-      <input id="musicQuery" placeholder="Search songs or artists..." required>
-      <button class="primary">Search Music</button>
-    </form>
-
-    <div id="musicStatus" class="status">Search for your favorite music.</div>
-    <div id="musicResults" class="results"></div>
-
-    <div id="musicDetail" hidden>
-      <button class="secondary back" id="musicBack">← Back to results</button>
-
-      <div class="detail">
-        <img id="musicCover" alt="Album artwork">
+    <div style="margin-top:45px">
+      <div class="section-heading">
         <div>
-          <h1 id="musicTitle"></h1>
-          <p id="musicArtist" class="muted"></p>
-          <p id="musicAlbum" class="muted"></p>
-
-          <div class="detail-actions">
-            <a id="youtubeLink" class="primary" target="_blank" rel="noopener noreferrer">
-              ▶ Play on YouTube
-            </a>
-            <button class="secondary" id="saveMusic">+ Save Song</button>
-          </div>
+          <div class="eyebrow">Your collection</div>
+          <h2>Saved music</h2>
         </div>
       </div>
+      <div id="music-library"></div>
     </div>
+  </section>
 
-    <div id="savedMusic">
-      <div class="section-heading">
-        <h2>MY MUSIC</h2>
-        <span class="muted">Saved collection</span>
+  <!-- WATCHLIST -->
+  <section class="page" id="page-watchlist">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Your entertainment</div>
+        <h1>Watchlist<span class="pink">.</span></h1>
+        <p>Discover movies and television shows.</p>
       </div>
-      <div id="musicLibrary" class="results"></div>
     </div>
-  </div>
-</section>
 
-<!-- WATCHLIST -->
+    <div class="search-row">
+      <input id="show-search" placeholder="Search movies or TV shows..." />
+      <button class="action" id="show-search-btn">Search</button>
+    </div>
 
-<section class="page" id="page-watchlist" hidden>
+    <div class="eyebrow">Discover</div>
+    <div id="show-results" class="results">
+      <div class="empty">Search for a movie or television show.</div>
+    </div>
 
-  <div class="eyebrow">MODULE 02 / SCREEN</div>
-  <h1 class="page-title">Watchlist</h1>
-  <p class="page-intro">
-    Discover movies and shows. Keep track of what you want to watch.
-  </p>
-
-  <div class="panel">
-    <h2>▣ Discover Titles</h2>
-
-    <form id="showForm">
-      <input id="showQuery" placeholder="Search movies or TV shows..." required>
-      <button class="primary">Search Titles</button>
-    </form>
-
-    <div id="showStatus" class="status">Find something to watch.</div>
-    <div id="showResults" class="results"></div>
-
-    <div id="showDetail" hidden>
-      <button class="secondary back" id="showBack">← Back to results</button>
-
-      <div class="detail">
-        <img id="showCover" alt="Title poster">
+    <div style="margin-top:45px">
+      <div class="section-heading">
         <div>
-          <h1 id="showTitle"></h1>
-          <p id="showMeta" class="muted"></p>
-          <p id="showType" class="muted"></p>
-
-          <div class="detail-actions">
-            <select id="showStatusChoice">
-              <option>Want to watch</option>
-              <option>Watching</option>
-              <option>Finished</option>
-            </select>
-            <button class="primary" id="saveShow">+ Add to Watchlist</button>
-          </div>
+          <div class="eyebrow">Your saved titles</div>
+          <h2>My watchlist</h2>
         </div>
+        <select id="watch-filter">
+          <option value="All">All titles</option>
+          <option value="Want to watch">Want to watch</option>
+          <option value="Watching">Watching</option>
+          <option value="Finished">Finished</option>
+        </select>
       </div>
+      <div id="watch-library"></div>
     </div>
+  </section>
 
-    <div id="savedShows">
-      <div class="section-heading">
-        <h2>MY WATCHLIST</h2>
-        <span class="muted">Your collection</span>
+  <!-- NEWS -->
+  <section class="page" id="page-news">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Stay informed</div>
+        <h1>News<span class="pink">.</span></h1>
+        <p>Entertainment headlines and stories.</p>
       </div>
-      <div id="showLibrary" class="results"></div>
-    </div>
-  </div>
-</section>
-
-<!-- NEWS -->
-
-<section class="page" id="page-news" hidden>
-
-  <div class="eyebrow">MODULE 03 / CULTURE</div>
-  <h1 class="page-title">Entertainment News</h1>
-  <p class="page-intro">
-    Your entertainment and arts news feed.
-  </p>
-
-  <div class="panel">
-    <div class="news-header">
-      <h2>◉ Latest Headlines</h2>
-      <button class="primary" id="refresh">↻ Refresh</button>
+      <button class="secondary" id="refresh-news">Refresh news</button>
     </div>
 
-    <p id="newsStatus" class="status">Loading headlines...</p>
-    <div id="newsList"></div>
-  </div>
-
-</section>
+    <div id="news-feed">
+      <div class="empty">Loading the latest entertainment news...</div>
+    </div>
+  </section>
 
 </main>
 
-<footer>NEXUS SYSTEMS · PERSONAL MEDIA INTERFACE</footer>
-
-</div>
+<footer>
+  NEXUS © 2026 · YOUR UNIVERSE, CONNECTED.
+</footer>
 
 <script>
-const $ = id => document.getElementById(id);
+/* ------------------------------
+   PAGE NAVIGATION
+------------------------------ */
 
-/* STORAGE */
+function navigate(page) {
+  const pages = document.querySelectorAll(".page");
+  const navButtons = document.querySelectorAll("nav button[data-page]");
 
-function read(key) {
+  let target = document.getElementById("page-" + page);
+
+  if (!target) return;
+
+  pages.forEach(section => {
+    section.classList.remove("active");
+  });
+
+  target.classList.add("active");
+
+  navButtons.forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.page === page
+    );
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (page === "music") renderMusicLibrary();
+  if (page === "watchlist") renderWatchlist();
+  if (page === "news") loadNews();
+}
+
+document.querySelectorAll("[data-page]").forEach(button => {
+  button.addEventListener("click", () => {
+    navigate(button.dataset.page);
+  });
+});
+
+document.querySelectorAll("[data-go]").forEach(button => {
+  button.addEventListener("click", () => {
+    navigate(button.dataset.go);
+  });
+});
+
+/* ------------------------------
+   CURSOR VOID EFFECT
+------------------------------ */
+
+document.addEventListener("mousemove", event => {
+  document.documentElement.style.setProperty("--x", event.clientX + "px");
+  document.documentElement.style.setProperty("--y", event.clientY + "px");
+});
+
+/* ------------------------------
+   STORAGE
+------------------------------ */
+
+function getSaved(key) {
   try {
-    return JSON.parse(localStorage.getItem(key) || "[]");
+    return JSON.parse(localStorage.getItem(key)) || [];
   } catch {
     return [];
   }
 }
 
-function write(key, data) {
+function saveData(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-/* NAVIGATION */
+function updateDashboardCounts() {
+  document.getElementById("home-music-count").textContent =
+    getSaved("nexusMusic").length;
 
-function navigate(page) {
-  document.querySelectorAll(".page").forEach(section => {
-    section.hidden = section.id !== "page-" + page;
-  });
-
-  document.querySelectorAll("nav button").forEach(button => {
-    button.classList.toggle("active", button.dataset.page === page);
-  });
-
-  if (page === "news") loadNews();
-
-  window.scrollTo({top:0, behavior:"smooth"});
+  document.getElementById("home-watch-count").textContent =
+    getSaved("nexusShows").length;
 }
 
-document.querySelectorAll("[data-page]").forEach(button => {
-  button.addEventListener("click", () => navigate(button.dataset.page));
-});
+/* ------------------------------
+   MUSIC SEARCH
+------------------------------ */
 
-document.querySelectorAll("[data-go]").forEach(button => {
-  button.addEventListener("click", () => navigate(button.dataset.go));
-});
+async function searchMusic() {
+  const query = document.getElementById("music-search").value.trim();
+  const results = document.getElementById("music-results");
 
-/* MUSIC */
+  if (!query) {
+    results.innerHTML = '<div class="empty">Enter a song or artist name.</div>';
+    return;
+  }
 
-let selectedSong = null;
-
-function songCard(song, saved = false) {
-  const card = document.createElement("button");
-  card.className = "media-card";
-  card.type = "button";
-
-  const image = document.createElement("img");
-  image.src = song.artwork || song.artworkUrl100 || "";
-  image.alt = "Artwork for " + song.trackName;
-  image.loading = "lazy";
-
-  const title = document.createElement("strong");
-  title.textContent = song.trackName || "Unknown Song";
-
-  const artist = document.createElement("span");
-  artist.textContent = song.artistName || "Unknown Artist";
-
-  card.append(image, title, artist);
-
-  card.addEventListener("click", () => openSong(song));
-
-  return card;
-}
-
-function openSong(song) {
-  selectedSong = song;
-
-  $("musicResults").hidden = true;
-  $("savedMusic").hidden = true;
-  $("musicDetail").hidden = false;
-
-  $("musicCover").src = song.artwork || song.artworkUrl100 || "";
-  $("musicTitle").textContent = song.trackName || "Unknown";
-  $("musicArtist").textContent = "Artist: " + (song.artistName || "Unknown");
-  $("musicAlbum").textContent = "Album: " + (song.collectionName || "Unknown");
-
-  $("youtubeLink").href =
-    "https://www.youtube.com/results?search_query=" +
-    encodeURIComponent((song.trackName || "") + " " + (song.artistName || "") + " official audio");
-
-  const exists = read("nexusMusic").some(
-    item => String(item.trackId) === String(song.trackId)
-  );
-
-  $("saveMusic").textContent = exists ? "✓ Already Saved" : "+ Save Song";
-  $("saveMusic").disabled = exists;
-}
-
-$("musicForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const query = $("musicQuery").value.trim();
-  if (!query) return;
-
-  $("musicStatus").textContent = "Searching music...";
-  $("musicResults").replaceChildren();
-  $("musicResults").hidden = false;
-  $("musicDetail").hidden = true;
-  $("savedMusic").hidden = false;
+  results.innerHTML = '<div class="empty">Searching music...</div>';
 
   try {
     const response = await fetch(
       "https://itunes.apple.com/search?term=" +
       encodeURIComponent(query) +
-      "&entity=song&limit=24"
+      "&entity=song&limit=20"
     );
-
-    if (!response.ok) throw new Error();
 
     const data = await response.json();
 
-    if (!data.results.length) {
-      $("musicStatus").textContent = "No songs found.";
+    if (!data.results || data.results.length === 0) {
+      results.innerHTML = '<div class="empty">No songs found. Try another search.</div>';
       return;
     }
 
-    $("musicStatus").textContent =
-      data.results.length + " songs found. Select one for details.";
+    results.innerHTML = data.results.map(song => `
+      <div class="result-card">
+        <img src="${escapeHTML(song.artworkUrl100 || "")}" alt="Album artwork">
+        <h3>${escapeHTML(song.trackName || "Unknown song")}</h3>
+        <p>${escapeHTML(song.artistName || "Unknown artist")}</p>
+        <button class="action" data-add-song="${song.trackId}">＋ Add to library</button>
+      </div>
+    `).join("");
 
-    data.results.forEach(song => {
-      const item = {
-        ...song,
-        artwork: song.artworkUrl100
-          ? song.artworkUrl100.replace("100x100", "600x600")
-          : ""
-      };
-
-      $("musicResults").append(songCard(item));
+    results.querySelectorAll("[data-add-song]").forEach(button => {
+      button.addEventListener("click", () => {
+        const song = data.results.find(item =>
+          String(item.trackId) === button.dataset.addSong
+        );
+        if (song) addSong(song);
+      });
     });
 
-  } catch {
-    $("musicStatus").textContent = "Music search unavailable. Try again later.";
+  } catch (error) {
+    results.innerHTML = '<div class="empty">Music search failed. Check your internet connection and try again.</div>';
   }
-});
+}
 
-$("saveMusic").addEventListener("click", () => {
-  if (!selectedSong) return;
+function addSong(song) {
+  const library = getSaved("nexusMusic");
 
-  const songs = read("nexusMusic");
-
-  if (songs.some(song => String(song.trackId) === String(selectedSong.trackId))) return;
-
-  songs.unshift(selectedSong);
-  write("nexusMusic", songs);
-
-  renderMusic();
-
-  $("saveMusic").textContent = "✓ Saved";
-  $("saveMusic").disabled = true;
-});
-
-function renderMusic() {
-  const target = $("musicLibrary");
-  target.replaceChildren();
-
-  const songs = read("nexusMusic");
-
-  if (!songs.length) {
-    target.innerHTML = '<div class="empty">Your music library is empty. Search and save a song.</div>';
+  if (library.some(item => item.trackId === song.trackId)) {
+    alert("This song is already in your library.");
     return;
   }
 
-  songs.forEach((song, index) => {
-    const card = songCard(song);
+  library.push(song);
+  saveData("nexusMusic", library);
+  renderMusicLibrary();
+  updateDashboardCounts();
+}
 
-    const remove = document.createElement("button");
-    remove.className = "secondary";
-    remove.textContent = "Remove";
-    remove.style.marginTop = "9px";
+function renderMusicLibrary() {
+  const library = getSaved("nexusMusic");
+  const container = document.getElementById("music-library");
 
-    remove.addEventListener("click", event => {
-      event.stopPropagation();
+  if (!library.length) {
+    container.innerHTML = '<div class="empty">Your music library is empty. Search for songs to add them.</div>';
+    return;
+  }
 
-      const current = read("nexusMusic");
-      current.splice(index, 1);
-      write("nexusMusic", current);
-      renderMusic();
+  container.innerHTML = library.map(song => `
+    <div class="saved-item">
+      <img src="${escapeHTML(song.artworkUrl100 || "")}" alt="">
+      <div class="saved-info">
+        <h3>${escapeHTML(song.trackName || "Unknown song")}</h3>
+        <p>${escapeHTML(song.artistName || "Unknown artist")}</p>
+      </div>
+      <div class="saved-actions">
+        <button class="secondary" data-listen="${song.trackId}">Preview</button>
+        <button class="secondary" data-remove-song="${song.trackId}">Remove</button>
+      </div>
+    </div>
+  `).join("");
+
+  container.querySelectorAll("[data-remove-song]").forEach(button => {
+    button.addEventListener("click", () => {
+      const updated = getSaved("nexusMusic").filter(
+        song => String(song.trackId) !== button.dataset.removeSong
+      );
+      saveData("nexusMusic", updated);
+      renderMusicLibrary();
+      updateDashboardCounts();
     });
+  });
 
-    card.append(remove);
-    target.append(card);
+  container.querySelectorAll("[data-listen]").forEach(button => {
+    button.addEventListener("click", () => {
+      const song = library.find(
+        item => String(item.trackId) === button.dataset.listen
+      );
+      if (song && song.previewUrl) {
+        window.open(song.previewUrl, "_blank");
+      } else {
+        alert("No preview is available for this song.");
+      }
+    });
   });
 }
 
-$("musicBack").addEventListener("click", () => {
-  $("musicDetail").hidden = true;
-  $("musicResults").hidden = false;
-  $("savedMusic").hidden = false;
+document.getElementById("music-search-btn").addEventListener("click", searchMusic);
+
+document.getElementById("music-search").addEventListener("keydown", event => {
+  if (event.key === "Enter") searchMusic();
 });
 
-/* MOVIES AND TV */
+/* ------------------------------
+   WATCHLIST SEARCH
+------------------------------ */
 
-let selectedShow = null;
+async function searchShows() {
+  const query = document.getElementById("show-search").value.trim();
+  const results = document.getElementById("show-results");
 
-function normalizeTitle(item, type) {
-  const artwork = item.artworkUrl100
-    ? item.artworkUrl100.replace("100x100", "600x600")
-    : "";
+  if (!query) {
+    results.innerHTML = '<div class="empty">Enter a movie or show title.</div>';
+    return;
+  }
 
-  return {
-    id: type === "Movie" ? item.trackId : item.collectionId,
-    title: type === "Movie" ? item.trackName : item.collectionName,
-    artwork,
-    artworkUrl100: item.artworkUrl100 || "",
-    artistName: item.artistName || "",
-    genre: item.primaryGenreName || "",
-    year: (item.releaseDate || "").slice(0,4),
-    type
-  };
-}
-
-function showCard(item) {
-  const card = document.createElement("button");
-  card.type = "button";
-  card.className = "media-card";
-
-  const image = document.createElement("img");
-  image.src = item.artwork || item.artworkUrl100 || "";
-  image.alt = "Poster for " + item.title;
-  image.loading = "lazy";
-
-  const title = document.createElement("strong");
-  title.textContent = item.title || "Unknown Title";
-
-  const meta = document.createElement("span");
-  meta.textContent = item.type + (item.year ? " · " + item.year : "");
-
-  card.append(image, title, meta);
-  card.addEventListener("click", () => openShow(item));
-
-  return card;
-}
-
-function openShow(item) {
-  selectedShow = item;
-
-  $("showResults").hidden = true;
-  $("savedShows").hidden = true;
-  $("showDetail").hidden = false;
-
-  $("showCover").src = item.artwork || item.artworkUrl100 || "";
-  $("showTitle").textContent = item.title;
-  $("showMeta").textContent =
-    [item.artistName, item.year, item.genre].filter(Boolean).join(" · ");
-
-  $("showType").textContent = item.type;
-
-  const saved = read("nexusShows").find(
-    show => String(show.id) === String(item.id)
-  );
-
-  $("showStatusChoice").value = saved?.status || "Want to watch";
-  $("saveShow").textContent = saved ? "Update Status" : "+ Add to Watchlist";
-  $("saveShow").disabled = false;
-}
-
-$("showForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const query = $("showQuery").value.trim();
-  if (!query) return;
-
-  $("showStatus").textContent = "Searching movies and shows...";
-  $("showResults").replaceChildren();
-  $("showResults").hidden = false;
-  $("showDetail").hidden = true;
-  $("savedShows").hidden = false;
+  results.innerHTML = '<div class="empty">Searching movies and shows...</div>';
 
   try {
-    const [tvResponse, movieResponse] = await Promise.all([
-      fetch("https://itunes.apple.com/search?term=" +
-        encodeURIComponent(query) + "&entity=tvShow&limit=12"),
-      fetch("https://itunes.apple.com/search?term=" +
-        encodeURIComponent(query) + "&entity=movie&limit=12")
+    const [moviesResponse, showsResponse] = await Promise.all([
+      fetch(
+        "https://itunes.apple.com/search?term=" +
+        encodeURIComponent(query) +
+        "&entity=movie&limit=15"
+      ),
+      fetch(
+        "https://itunes.apple.com/search?term=" +
+        encodeURIComponent(query) +
+        "&entity=tvEpisode&limit=15"
+      )
     ]);
 
-    if (!tvResponse.ok || !movieResponse.ok) throw new Error();
+    const moviesData = await moviesResponse.json();
+    const showsData = await showsResponse.json();
 
-    const [tvData, movieData] = await Promise.all([
-      tvResponse.json(),
-      movieResponse.json()
-    ]);
-
-    const results = [
-      ...(tvData.results || []).map(item => normalizeTitle(item, "TV Show")),
-      ...(movieData.results || []).map(item => normalizeTitle(item, "Movie"))
+    const combined = [
+      ...(moviesData.results || []).map(item => ({
+        id: "movie-" + item.trackId,
+        title: item.trackName,
+        image: item.artworkUrl100,
+        description: item.longDescription || item.shortDescription || "",
+        kind: "Movie",
+        date: item.releaseDate || ""
+      })),
+      ...(showsData.results || []).map(item => ({
+        id: "show-" + item.collectionId,
+        title: item.collectionName || item.trackName,
+        image: item.artworkUrl100,
+        description: item.longDescription || "",
+        kind: "TV",
+        date: item.releaseDate || ""
+      }))
     ];
 
-    const unique = results.filter((item, index, array) =>
-      item.id && array.findIndex(other =>
-        String(other.id) === String
+    const unique = combined.filter((item, index, array) =>
+      item.title && array.findIndex(other => other.id === item.id) === index
+    );
+
+    if (!unique.length) {
+      results.innerHTML = '<div class="empty">No titles found. Try another search.</div>';
+      return;
+    }
+
+    results.innerHTML = unique.map(item => `
+      <div class="result-card">
+        <img src="${escapeHTML(item.image || "")}" alt="Poster">
+        <h3>${escapeHTML(item.title)}</h3>
+        <p>${item.kind}${item.date ? " · " + escapeHTML(item.date.slice(0,4)) : ""}</p>
+        <button class="action" data-add-show="${escapeHTML(item.id)}">＋ Add to watchlist</button>
+      </div>
+    `).join("");
+
+    results.querySelectorAll("[data-add-show]").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = unique.find(show => show.id === button.dataset.addShow);
+        if (item) addShow(item);
+      });
+    });
+
+  } catch (error) {
+    results.innerHTML = '<div class="empty">Search failed. Please try again.</div>';
+  }
+}
+
+function addShow(item) {
+  const watchlist = getSaved("nexusShows");
+
+  if (watchlist.some(show => show.id === item.id)) {
+    alert("This title is already in your watchlist.");
+    return;
+  }
+
+  watchlist.push({
+    ...item,
+    status: "Want to watch"
+  });
+
+  saveData("nexusShows", watchlist);
+  renderWatchlist();
+  updateDashboardCounts();
+}
+
+function renderWatchlist() {
+  const watchlist = getSaved("nexusShows");
+  const container = document.getElementById("watch-library");
+  const filter = document.getElementById("watch-filter").value;
+
+  const filtered = filter === "All"
+    ? watchlist
+    : watchlist.filter(item => item.status === filter);
+
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty">Nothing here yet. Search for a movie or show to add.</div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(item => `
+    <div class="saved-item">
+      <img src="${escapeHTML(item.image || "")}" alt="">
+      <div class="saved-info">
+        <h3>${escapeHTML(item.title)}</h3>
+        <p>${escapeHTML(item.kind)}</p>
+        <div class="status">${escapeHTML(item.status)}</div>
+      </div>
+      <div class="saved-actions">
+        <select data-status="${escapeHTML(item.id)}">
+          <option ${item.status === "Want to watch" ? "selected" : ""}>Want to watch</option>
+          <option ${item.status === "Watching" ? "selected" : ""}>Watching</option>
+          <option ${item.status === "Finished" ? "selected" : ""}>Finished</option>
+        </select>
+        <button class="secondary" data-remove-show="${escapeHTML(item.id)}">Remove</button>
+      </div>
+    </div>
+  `).join("");
+
+  container.querySelectorAll("[data-status]").forEach(select => {
+    select.addEventListener("change", () => {
+      const updated = getSaved("nexusShows").map(item =>
+        item.id === select.dataset.status
+          ? { ...item, status: select.value }
+          : item
+      );
+      saveData("nexusShows", updated);
+      renderWatchlist();
+    });
+  });
+
+  container.querySelectorAll("[data-remove-show]").forEach(button => {
+    button.addEventListener("click", () => {
+      const updated = getSaved("nexusShows").filter(
+        item => item.id !== button.dataset.removeShow
+      );
+      saveData("nexusShows", updated);
+      renderWatchlist();
+      updateDashboardCounts();
+    });
+  });
+}
+
+document.getElementById("show-search-btn").addEventListener("click", searchShows);
+
+document.getElementById("show-search").addEventListener("keydown", event => {
+  if (event.key === "Enter") searchShows();
+});
+
+document.getElementById("watch-filter").addEventListener("change", renderWatchlist);
+
+/* ------------------------------
+   ENTERTAINMENT NEWS
+------------------------------ */
+
+let newsLoaded = false;
+
+async function loadNews(force = false) {
+  const container = document.getElementById("news-feed");
+
+  if (newsLoaded && !force) return;
+
+  container.innerHTML = '<div class="empty">Loading entertainment headlines...</div>';
+
+  const rssURL = "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml";
+  const proxyURL = "https://api.allorigins.win/raw?url=" + encodeURIComponent(rssURL);
+
+  try {
+    const response = await fetch(proxyURL);
+
+    if (!response.ok) throw new Error("News unavailable");
+
+    const xmlText = await response.text();
+    const xml = new DOMParser().parseFromString(xmlText, "text/xml");
+    const items = Array.from(xml.querySelectorAll("item")).slice(0, 20);
+
+    if (!items.length) throw new Error("No news found");
+
+    container.innerHTML = items.map(item => {
+      const title = item.querySelector("title")?.textContent || "Untitled story";
+      const description = item.querySelector("description")?.textContent || "";
+      const link = item.querySelector("link")?.textContent || "#";
+      const date = item.querySelector("pubDate")?.textContent || "";
+
+      return `
+        <article class="news-item">
+          <div class="eyebrow">BBC Entertainment & Arts</div>
+          <h3>${escapeHTML(title)}</h3>
+          <p>${escapeHTML(description.replace(/<[^>]*>/g, ""))}</p>
+          <a href="${escapeHTML(link)}" target="_blank" rel="noopener noreferrer">Read full story ↗</a>
+          <p style="font-size:11px">${escapeHTML(date)}</p>
+        </article>
+      `;
+    }).join("");
+
+    newsLoaded = true;
+
+  } catch (error) {
+    container.innerHTML = `
+      <div class="empty">
+        News could not load right now.
+        <p>Try refreshing, or check your internet connection.</p>
+      </div>
+    `;
+  }
+}
+
+document.getElementById("refresh-news").addEventListener("click", () => {
+  newsLoaded = false;
+  loadNews(true);
+});
+
+/* ------------------------------
+   HTML ESCAPING
+------------------------------ */
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[character]);
+}
+
+/* ------------------------------
+   INITIALIZE
+------------------------------ */
+
+updateDashboardCounts();
+renderMusicLibrary();
+renderWatchlist();
+
+</script>
+</body>
+</html>
