@@ -108,6 +108,7 @@ nav {
   display: flex;
   align-items: center;
   gap: 9px;
+  flex-wrap: wrap;
 }
 
 nav button {
@@ -118,548 +119,493 @@ nav button {
   border-radius: 9px;
   cursor: pointer;
   font-size: 13px;
-  transition: .2s;
 }
 
 nav button:hover,
 nav button.active {
   color: var(--accent);
-  background: var(--glow);
   border-color: var(--border);
+  background: var(--glow);
 }
+
+button, input, select {
+  font: inherit;
+}
+
+button { cursor: pointer; }
 
 main {
-  width: min(1150px, 90%);
-  margin: 45px auto 80px;
+  width: min(1100px, 90%);
+  margin: 45px auto;
+  min-height: 65vh;
 }
 
-.page { display: none; animation: appear .3s ease; }
+.page { display: none; }
 .page.active { display: block; }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.eyebrow {
-  color: var(--accent);
-  letter-spacing: 4px;
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 h1 {
-  font-size: clamp(35px, 6vw, 65px);
-  margin: 12px 0;
-  letter-spacing: -2px;
+  font-size: clamp(30px, 5vw, 48px);
+  margin: 0 0 12px;
 }
 
-h2 { font-size: 25px; margin: 0 0 12px; }
-h3 { margin: 0 0 8px; }
+h2 { margin-top: 0; }
 
 p { color: var(--muted); line-height: 1.6; }
 
 .pink { color: var(--accent); }
 
-.hero {
-  padding: 65px 45px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  background:
-    radial-gradient(ellipse at 85% 15%, var(--glow), transparent 45%),
-    linear-gradient(135deg, var(--panel2), var(--bg));
-  margin-bottom: 35px;
-}
-
-.hero p { max-width: 500px; }
-
-.dashboard-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 22px;
-}
-
-.clock-card {
-  min-width: 210px;
-  padding: 17px 22px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-}
-
-#clock {
-  font-size: 28px;
-  font-weight: bold;
+.eyebrow {
   color: var(--accent);
+  font-size: 11px;
   letter-spacing: 2px;
-}
-
-#clock-date {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 5px;
-}
-
-.quote-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 23px;
-  margin: 25px 0;
-}
-
-.quote-card blockquote {
-  font-size: 18px;
-  line-height: 1.6;
-  margin: 10px 0;
-  color: var(--text);
-}
-
-.quote-card small { color: var(--muted); }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 17px;
-  margin-top: 20px;
-}
-
-.card {
-  background: linear-gradient(145deg, var(--panel2), var(--panel));
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 22px;
-  transition: .2s;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
-  box-shadow: 0 10px 35px var(--glow);
-}
-
-.click-card { cursor: pointer; }
-
-.card-icon {
-  font-size: 28px;
-  margin-bottom: 18px;
-}
-
-.card p { font-size: 13px; margin-bottom: 0; }
-
-.section-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-bottom: 25px;
-}
-
-.section-heading p { margin: 5px 0 0; }
-
-.search-row {
-  display: flex;
-  gap: 10px;
-  margin: 25px 0;
-}
-
-input, select {
-  background: var(--panel);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 14px;
-  outline: none;
-  min-width: 0;
-}
-
-input { flex: 1; }
-input:focus, select:focus { border-color: var(--accent); }
-
-button.action {
-  background: var(--accent);
-  color: #170812;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 9px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .2s;
-}
-
-button.action:hover {
-  background: var(--accent2);
-  transform: translateY(-1px);
-}
-
-button.secondary {
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid var(--border);
-  padding: 9px 13px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button.secondary:hover { background: var(--glow); }
-
-.results {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-}
-
-.result-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  padding: 13px;
-  overflow: hidden;
-}
-
-.result-card img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 8px;
-  background: var(--panel2);
+  text-transform: uppercase;
   margin-bottom: 12px;
 }
 
-.result-card h3 { font-size: 15px; line-height: 1.4; }
-.result-card p { font-size: 12px; margin: 5px 0 12px; }
-.result-card button { width: 100%; }
+.hero {
+  padding: 55px 0;
+}
 
-.saved-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 13px;
+.hero h1 span { color: var(--accent); }
+
+.hero-grid,
+.dashboard-grid,
+.music-grid,
+.watch-grid,
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.panel,
+.theme-card,
+.music-card,
+.show-card,
+.news-item,
+.arcade-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
-
-.saved-item img {
-  width: 58px;
-  height: 58px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.saved-info { flex: 1; min-width: 0; }
-.saved-info h3 { font-size: 14px; }
-.saved-info p { font-size: 12px; margin: 4px 0 0; }
-
-.saved-actions {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.status {
-  color: var(--accent);
-  font-size: 11px;
-  margin-top: 5px;
-}
-
-.empty {
-  padding: 35px;
-  text-align: center;
-  background: var(--panel);
-  border: 1px dashed var(--border);
-  border-radius: 13px;
-  color: var(--muted);
-}
-
-.news-item {
-  padding: 20px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  margin-bottom: 13px;
-}
-
-.news-item a {
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.news-item a:hover { text-decoration: underline; }
-
-.theme-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
+  border-radius: 15px;
   padding: 22px;
-  border-radius: 14px;
-  margin-top: 25px;
 }
 
-.theme-options {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 15px;
+.panel h3,
+.theme-card h2 { margin-top: 0; }
+
+.panel:hover,
+.arcade-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
 }
 
-.theme-choice {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+.panel,
+.arcade-card {
+  transition: .2s;
+}
+
+.action,
+.secondary {
+  border: 1px solid var(--border);
+  padding: 11px 16px;
+  border-radius: 9px;
+  color: var(--text);
+  background: var(--panel2);
+}
+
+.action {
+  background: var(--accent);
+  color: #160b12;
+  font-weight: 700;
+}
+
+.action:hover { filter: brightness(1.1); }
+.secondary:hover { border-color: var(--accent); }
+
+input, select {
   background: var(--panel2);
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 11px 15px;
-  cursor: pointer;
+  border-radius: 8px;
+  padding: 11px;
 }
 
-.theme-choice.selected {
-  border-color: var(--accent);
-  box-shadow: 0 0 15px var(--glow);
-}
-
-.theme-dot {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
+input:focus, select:focus {
+  outline: 1px solid var(--accent);
 }
 
 footer {
   text-align: center;
-  color: #655965;
-  font-size: 11px;
   padding: 30px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2px;
   border-top: 1px solid var(--border);
 }
 
-@media(max-width: 650px) {
-  header {
-    padding: 17px 5%;
-    align-items: flex-start;
-    flex-direction: column;
-  }
+#clock {
+  color: var(--accent);
+  font-size: 35px;
+  font-weight: 800;
+}
 
-  nav { width: 100%; overflow-x: auto; }
-  nav button { white-space: nowrap; }
-  main { margin-top: 25px; }
-  .hero { padding: 40px 23px; }
-  .search-row { flex-direction: column; }
-  .saved-item { flex-wrap: wrap; }
-  .saved-actions { width: 100%; }
+.quote-card {
+  border-left: 3px solid var(--accent);
+  padding: 15px 20px;
+  background: var(--panel);
+  border-radius: 0 12px 12px 0;
+}
+
+.music-card, .show-card { margin-bottom: 12px; }
+
+.music-card button, .show-card button { margin-top: 10px; }
+
+.news-item h3 { color: var(--text); }
+.news-item a { color: var(--accent); }
+
+.theme-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.theme-choice {
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 9px;
+}
+
+.theme-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.empty {
+  padding: 25px;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.arcade-card {
+  cursor: pointer;
+  min-height: 150px;
+}
+
+.arcade-card .game-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.game-shell {
+  max-width: 650px;
+  margin: 25px auto;
+  padding: 22px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.game-top,
+.game-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.game-status {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 12px;
+  margin-bottom: 15px;
+  color: var(--accent2);
+}
+
+.game-board-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0;
+}
+
+.chess-board {
+  display: grid;
+  grid-template-columns: repeat(8, min(10vw, 58px));
+  grid-template-rows: repeat(8, min(10vw, 58px));
+  border: 3px solid var(--border);
+}
+
+.chess-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(20px, 5vw, 38px);
+  border: 0;
+  padding: 0;
+}
+
+.chess-square.light { background: #e8d8c4; color: #201820; }
+.chess-square.dark { background: #886b82; color: #fff; }
+.chess-square.selected { outline: 3px solid #ffcf57; outline-offset: -3px; }
+.chess-square.legal { box-shadow: inset 0 0 0 4px #5be0a0; }
+
+.chess-note {
+  font-size: 12px;
+  text-align: center;
+}
+
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, min(22vw, 105px));
+  gap: 8px;
+  justify-content: center;
+}
+
+.ttt-cell {
+  height: min(22vw, 105px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel2);
+  color: var(--accent);
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.ttt-cell.o { color: #8edaff; }
+
+.game2048 {
+  display: grid;
+  grid-template-columns: repeat(4, min(18vw, 75px));
+  gap: 7px;
+  background: var(--panel2);
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.tile2048 {
+  width: min(18vw, 75px);
+  height: min(18vw, 75px);
+  border-radius: 7px;
+  background: #29212b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(17px, 4vw, 25px);
+  font-weight: 800;
+  color: white;
+}
+
+.tile2048.v2 { background: #75616e; }
+.tile2048.v4 { background: #a27a91; }
+.tile2048.v8 { background: #d17a9e; }
+.tile2048.v16 { background: #e66d9c; }
+.tile2048.v32 { background: #ed568e; }
+.tile2048.v64 { background: #f43e7e; }
+.tile2048.big { background: #b47aff; }
+
+.mine-board {
+  display: grid;
+  grid-template-columns: repeat(10, min(8vw, 42px));
+  gap: 3px;
+}
+
+.mine-cell {
+  width: min(8vw, 42px);
+  height: min(8vw, 42px);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--panel2);
+  color: var(--text);
+  font-weight: 800;
+}
+
+.mine-cell.open {
+  background: #302632;
+}
+
+.mine-cell.flag { color: var(--accent); }
+
+.snake-canvas {
+  width: min(100%, 400px);
+  aspect-ratio: 1;
+  background: #17111b;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+@media(max-width:700px) {
+  header { justify-content: center; }
+  nav { justify-content: center; }
+  main { margin: 25px auto; }
+  .hero { padding: 30px 0; }
 }
 </style>
 </head>
 
-<body data-theme="pink">
-
-<canvas id="petals"></canvas>
+<body>
 <div id="void"></div>
+<canvas id="petals"></canvas>
 
 <header>
-  <div class="logo" data-go="home">NEXUS<span>.</span></div>
-
+  <div class="logo" onclick="navigate('home')">NEX<span>US</span></div>
   <nav>
-    <button class="active" data-page="home">Home</button>
+    <button data-page="home" class="active">Home</button>
     <button data-page="music">Music</button>
     <button data-page="watchlist">Watchlist</button>
     <button data-page="news">News</button>
+    <button data-page="arcade">Arcade</button>
     <button data-page="settings">Settings</button>
   </nav>
 </header>
 
 <main>
 
-<!-- HOME -->
 <section class="page active" id="page-home">
-
-  <div class="dashboard-top">
-    <div>
-      <div class="eyebrow">Your personal universe</div>
-      <h2 id="greeting">Welcome to NEXUS.</h2>
-      <p id="greeting-subtitle">Your world, all in one place.</p>
-    </div>
-
-    <div class="clock-card">
-      <div id="clock">00:00:00</div>
-      <div id="clock-date">Loading date...</div>
-    </div>
-  </div>
-
   <div class="hero">
-    <div class="eyebrow">Your universe, connected</div>
-    <h1>Welcome to <span class="pink">NEXUS.</span></h1>
-    <p>Your personal space for music, movies, television, and entertainment news. Everything in one place.</p>
-    <button class="action" data-go="music">Explore NEXUS</button>
+    <div class="eyebrow">YOUR PERSONAL DASHBOARD</div>
+    <h1 id="greeting">Welcome back to <span>NEXUS.</span></h1>
+    <div id="clock">00:00:00</div>
+    <p id="clock-date"></p>
   </div>
 
-  <div class="section-heading">
-    <div>
-      <div class="eyebrow">Your dashboard</div>
-      <h2>Explore your universe.</h2>
+  <div class="dashboard-grid">
+    <div class="panel">
+      <div class="eyebrow">YOUR LIBRARY</div>
+      <h3>Music</h3>
+      <p>Keep your music collection organized.</p>
+      <button class="action" data-go="music">Open music</button>
     </div>
-  </div>
-
-  <div class="grid">
-    <div class="card click-card" data-go="music">
-      <div class="card-icon">♫</div>
-      <h2>Music</h2>
-      <p>Search songs, discover artists, and build your personal music library.</p>
+    <div class="panel">
+      <div class="eyebrow">YOUR WATCHLIST</div>
+      <h3>Movies & Shows</h3>
+      <p>Track what you want to watch.</p>
+      <button class="action" data-go="watchlist">Open watchlist</button>
     </div>
-
-    <div class="card click-card" data-go="watchlist">
-      <div class="card-icon">▣</div>
-      <h2>Watchlist</h2>
-      <p>Find movies and shows. Keep track of what you want to watch.</p>
-    </div>
-
-    <div class="card click-card" data-go="news">
-      <div class="card-icon">◈</div>
-      <h2>News</h2>
-      <p>Catch up on entertainment headlines and the latest stories.</p>
+    <div class="panel">
+      <div class="eyebrow">ENTERTAINMENT</div>
+      <h3>Arcade</h3>
+      <p>Play games against friends or AI.</p>
+      <button class="action" data-go="arcade">Enter arcade</button>
     </div>
   </div>
 
-  <div class="quote-card">
-    <div class="eyebrow">Daily thought</div>
-    <blockquote id="daily-quote">Loading your daily quote...</blockquote>
-    <small id="quote-author"></small>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <div class="eyebrow">Your music</div>
-      <h2 id="home-music-count">0</h2>
-      <p>Saved songs</p>
-    </div>
-    <div class="card">
-      <div class="eyebrow">Your watchlist</div>
-      <h2 id="home-watch-count">0</h2>
-      <p>Saved movies and shows</p>
-    </div>
+  <div class="quote-card" style="margin-top:25px">
+    <p id="daily-quote"></p>
+    <div id="quote-author" class="pink"></div>
   </div>
 </section>
 
-<!-- MUSIC -->
 <section class="page" id="page-music">
-  <div class="section-heading">
-    <div>
-      <div class="eyebrow">Audio library</div>
-      <h1>Music<span class="pink">.</span></h1>
-      <p>Find music. Build your collection.</p>
-    </div>
+  <div class="eyebrow">YOUR AUDIO LIBRARY</div>
+  <h1>Music</h1>
+  <p>Organize your music collection.</p>
+  <div class="panel">
+    <input id="music-title" placeholder="Song title">
+    <input id="music-artist" placeholder="Artist">
+    <input id="music-url" placeholder="Audio URL">
+    <button class="action" id="add-song">Add song</button>
   </div>
-
-  <div class="search-row">
-    <input id="music-search" placeholder="Search songs or artists..." />
-    <button class="action" id="music-search-btn">Search</button>
-  </div>
-
-  <div class="eyebrow">Search results</div>
-  <div id="music-results" class="results">
-    <div class="empty">Search for an artist or song to get started.</div>
-  </div>
-
-  <div style="margin-top:45px">
-    <div class="eyebrow">Your collection</div>
-    <h2>Saved music</h2>
-    <div id="music-library"></div>
-  </div>
+  <div id="music-library" style="margin-top:20px"></div>
 </section>
 
-<!-- WATCHLIST -->
 <section class="page" id="page-watchlist">
-  <div class="section-heading">
-    <div>
-      <div class="eyebrow">Your entertainment</div>
-      <h1>Watchlist<span class="pink">.</span></h1>
-      <p>Discover movies and television shows.</p>
-    </div>
-  </div>
-
-  <div class="search-row">
-    <input id="show-search" placeholder="Search movies or TV shows..." />
+  <div class="eyebrow">MOVIES & TELEVISION</div>
+  <h1>Watchlist</h1>
+  <p>Keep track of what you want to watch.</p>
+  <div class="panel">
+    <input id="show-search" placeholder="Search for a movie or show">
     <button class="action" id="show-search-btn">Search</button>
   </div>
-
-  <div class="eyebrow">Discover</div>
-  <div id="show-results" class="results">
-    <div class="empty">Search for a movie or television show.</div>
+  <div id="show-results" style="margin-top:20px"></div>
+  <div class="game-controls">
+    <select id="watch-filter">
+      <option value="all">All</option>
+      <option value="Watching">Watching</option>
+      <option value="Plan to watch">Plan to watch</option>
+      <option value="Finished">Finished</option>
+    </select>
   </div>
-
-  <div style="margin-top:45px">
-    <div class="section-heading">
-      <div>
-        <div class="eyebrow">Your saved titles</div>
-        <h2>My watchlist</h2>
-      </div>
-      <select id="watch-filter">
-        <option value="All">All titles</option>
-        <option value="Want to watch">Want to watch</option>
-        <option value="Watching">Watching</option>
-        <option value="Finished">Finished</option>
-      </select>
-    </div>
-    <div id="watch-library"></div>
-  </div>
+  <div id="watchlist"></div>
 </section>
 
-<!-- NEWS -->
 <section class="page" id="page-news">
-  <div class="section-heading">
-    <div>
-      <div class="eyebrow">Stay informed</div>
-      <h1>News<span class="pink">.</span></h1>
-      <p>Entertainment headlines and stories.</p>
+  <div class="eyebrow">LATEST HEADLINES</div>
+  <h1>Entertainment News</h1>
+  <p>Latest entertainment headlines.</p>
+  <button class="action" id="refresh-news">Refresh news</button>
+  <div id="news-feed" class="news-grid" style="margin-top:20px"></div>
+</section>
+
+<section class="page" id="page-arcade">
+  <div class="eyebrow">NEXUS ARCADE</div>
+  <h1>Arcade</h1>
+  <p>Choose a game. Play solo or challenge the AI.</p>
+
+  <div class="hero-grid" id="arcade-menu">
+    <div class="arcade-card" data-game="snake">
+      <div class="game-icon">🐍</div>
+      <h3>Snake</h3>
+      <p>Collect food and beat your high score.</p>
     </div>
-    <button class="secondary" id="refresh-news">Refresh news</button>
+    <div class="arcade-card" data-game="chess">
+      <div class="game-icon">♟</div>
+      <h3>Chess</h3>
+      <p>Play against another person or AI.</p>
+    </div>
+    <div class="arcade-card" data-game="ttt">
+      <div class="game-icon">⭕</div>
+      <h3>Tic-tac-toe</h3>
+      <p>Challenge a friend or the computer.</p>
+    </div>
+    <div class="arcade-card" data-game="2048">
+      <div class="game-icon">🔢</div>
+      <h3>2048</h3>
+      <p>Combine tiles to reach 2048.</p>
+    </div>
+    <div class="arcade-card" data-game="mines">
+      <div class="game-icon">💣</div>
+      <h3>Minesweeper</h3>
+      <p>Find safe squares and avoid mines.</p>
+    </div>
   </div>
 
-  <div id="news-feed">
-    <div class="empty">Open this page to load entertainment news.</div>
+  <div id="arcade-game" style="display:none">
+    <button class="secondary" id="back-arcade">← Back to games</button>
+    <div id="arcade-stage"></div>
   </div>
 </section>
 
-<!-- SETTINGS -->
 <section class="page" id="page-settings">
-  <div class="eyebrow">Personalize your experience</div>
-  <h1>Settings<span class="pink">.</span></h1>
+  <div class="eyebrow">PERSONALIZATION</div>
+  <h1>Settings</h1>
   <p>Make NEXUS feel like your own.</p>
 
   <div class="theme-card">
     <h2>Choose your theme</h2>
     <p>Select the accent color used throughout NEXUS.</p>
-
     <div class="theme-options">
       <button class="theme-choice" data-theme-choice="pink">
-        <span class="theme-dot" style="background:#ff4fa3"></span>
-        Pink
+        <span class="theme-dot" style="background:#ff4fa3"></span>Pink
       </button>
-
       <button class="theme-choice" data-theme-choice="purple">
-        <span class="theme-dot" style="background:#b47aff"></span>
-        Purple
+        <span class="theme-dot" style="background:#b47aff"></span>Purple
       </button>
-
       <button class="theme-choice" data-theme-choice="blue">
-        <span class="theme-dot" style="background:#55baff"></span>
-        Blue
+        <span class="theme-dot" style="background:#55baff"></span>Blue
       </button>
-
       <button class="theme-choice" data-theme-choice="green">
-        <span class="theme-dot" style="background:#55e6a5"></span>
-        Green
+        <span class="theme-dot" style="background:#55e6a5"></span>Green
       </button>
     </div>
-
     <p id="theme-status">Your theme is saved automatically.</p>
   </div>
 
@@ -679,9 +625,7 @@ footer {
 
 </main>
 
-<footer>
-  NEXUS © 2026 · YOUR UNIVERSE, CONNECTED.
-</footer>
+<footer>NEXUS © 2026 · YOUR UNIVERSE, CONNECTED.</footer>
 
 <script>
 /* PAGE NAVIGATION */
@@ -777,133 +721,101 @@ function loadDailyQuote() {
 
 loadDailyQuote();
 
-/* THEME SELECTOR */
-
-function applyTheme(theme) {
-  const allowed = ["pink", "purple", "blue", "green"];
-  if (!allowed.includes(theme)) theme = "pink";
-
-  document.body.dataset.theme = theme;
-  localStorage.setItem("nexusTheme", theme);
-
-  document.querySelectorAll("[data-theme-choice]").forEach(button => {
-    button.classList.toggle(
-      "selected",
-      button.dataset.themeChoice === theme
-    );
-  });
-
-  document.getElementById("theme-status").textContent =
-    "Current theme: " + theme.charAt(0).toUpperCase() + theme.slice(1);
-}
-
-document.querySelectorAll("[data-theme-choice]").forEach(button => {
-  button.addEventListener("click", () => {
-    applyTheme(button.dataset.themeChoice);
-  });
-});
-
-applyTheme(localStorage.getItem("nexusTheme") || "pink");
-
 /* CURSOR GLOW */
 
-let glowEnabled = true;
-
 document.addEventListener("mousemove", event => {
-  if (!glowEnabled) return;
-
   document.documentElement.style.setProperty("--x", event.clientX + "px");
   document.documentElement.style.setProperty("--y", event.clientY + "px");
 });
 
-document.getElementById("toggle-glow").addEventListener("click", event => {
-  glowEnabled = !glowEnabled;
-  document.getElementById("void").style.display = glowEnabled ? "block" : "none";
-  event.target.textContent = glowEnabled
-    ? "Turn cursor glow off"
-    : "Turn cursor glow on";
-});
+/* BACKGROUND PETALS */
 
-/* FALLING PINK PETALS */
-
-const canvas = document.getElementById("petals");
-const ctx = canvas.getContext("2d");
-
-let petalsEnabled = true;
+const petalsCanvas = document.getElementById("petals");
+const petalsContext = petalsCanvas.getContext("2d");
 let petals = [];
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth * devicePixelRatio;
-  canvas.height = window.innerHeight * devicePixelRatio;
-  canvas.style.width = window.innerWidth + "px";
-  canvas.style.height = window.innerHeight + "px";
-  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-}
-
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-function createPetal(startAtTop = false) {
-  return {
-    x: Math.random() * window.innerWidth,
-    y: startAtTop ? -20 : Math.random() * window.innerHeight,
-    size: 5 + Math.random() * 8,
-    speed: .7 + Math.random() * 1.5,
-    drift: Math.random() * 1.2 - .6,
-    rotation: Math.random() * Math.PI * 2,
-    spin: (Math.random() - .5) * .035,
-    opacity: .35 + Math.random() * .5
-  };
-}
-
-for (let i = 0; i < 35; i++) {
-  petals.push(createPetal());
+function resizePetals() {
+  petalsCanvas.width = window.innerWidth;
+  petalsCanvas.height = window.innerHeight;
+  petals = Array.from({length: 35}, () => ({
+    x: Math.random() * petalsCanvas.width,
+    y: Math.random() * petalsCanvas.height,
+    size: 3 + Math.random() * 5,
+    speed: .3 + Math.random() * .8,
+    drift: Math.random() * .5
+  }));
 }
 
 function drawPetals() {
-  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  petalsContext.clearRect(0, 0, petalsCanvas.width, petalsCanvas.height);
+  petalsContext.fillStyle = "rgba(255,79,163,.5)";
 
-  if (petalsEnabled) {
-    petals.forEach(petal => {
-      petal.y += petal.speed;
-      petal.x += petal.drift + Math.sin(petal.y / 50) * .4;
-      petal.rotation += petal.spin;
+  petals.forEach(petal => {
+    petalsContext.beginPath();
+    petalsContext.ellipse(
+      petal.x, petal.y,
+      petal.size, petal.size * .6,
+      Math.PI / 4, 0, Math.PI * 2
+    );
+    petalsContext.fill();
 
-      if (petal.y > window.innerHeight + 20) {
-        Object.assign(petal, createPetal(true));
-      }
+    petal.y += petal.speed;
+    petal.x += Math.sin(petal.y / 30) * petal.drift;
 
-      ctx.save();
-      ctx.translate(petal.x, petal.y);
-      ctx.rotate(petal.rotation);
-      ctx.globalAlpha = petal.opacity;
-      ctx.fillStyle = "#ff70b5";
-
-      ctx.beginPath();
-      ctx.ellipse(0, 0, petal.size * .55, petal.size, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.restore();
-    });
-  }
+    if (petal.y > petalsCanvas.height + 10) {
+      petal.y = -10;
+      petal.x = Math.random() * petalsCanvas.width;
+    }
+  });
 
   requestAnimationFrame(drawPetals);
 }
 
+resizePetals();
 drawPetals();
+window.addEventListener("resize", resizePetals);
 
-document.getElementById("toggle-petals").addEventListener("click", event => {
-  petalsEnabled = !petalsEnabled;
-  event.target.textContent = petalsEnabled
-    ? "Turn petals off"
-    : "Turn petals on";
+/* SETTINGS */
+
+document.querySelectorAll("[data-theme-choice]").forEach(button => {
+  button.addEventListener("click", () => {
+    const theme = button.dataset.themeChoice;
+    document.body.dataset.theme = theme;
+    localStorage.setItem("nexusTheme", theme);
+    document.getElementById("theme-status").textContent =
+      "Theme saved: " + theme;
+  });
 });
 
-/* STORAGE */
+const savedTheme = localStorage.getItem("nexusTheme");
+if (savedTheme) document.body.dataset.theme = savedTheme;
+
+document.getElementById("toggle-petals").addEventListener("click", event => {
+  const hidden = petalsCanvas.style.display === "none";
+  petalsCanvas.style.display = hidden ? "block" : "none";
+  event.target.textContent = hidden ? "Turn petals off" : "Turn petals on";
+  localStorage.setItem("nexusPetals", hidden ? "on" : "off");
+});
+
+document.getElementById("toggle-glow").addEventListener("click", event => {
+  const hidden = document.getElementById("void").style.display === "none";
+  document.getElementById("void").style.display = hidden ? "block" : "none";
+  event.target.textContent = hidden ? "Turn cursor glow off" : "Turn cursor glow on";
+  localStorage.setItem("nexusGlow", hidden ? "on" : "off");
+});
+
+if (localStorage.getItem("nexusPetals") === "off") {
+  petalsCanvas.style.display = "none";
+}
+if (localStorage.getItem("nexusGlow") === "off") {
+  document.getElementById("void").style.display = "none";
+}
+
+/* STORAGE HELPERS */
 
 function getSaved(key) {
   try {
-    return JSON.parse(localStorage.getItem(key)) || [];
+    return JSON.parse(localStorage.getItem(key) || "[]");
   } catch {
     return [];
   }
@@ -913,237 +825,136 @@ function saveData(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-function updateDashboardCounts() {
-  document.getElementById("home-music-count").textContent =
-    getSaved("nexusMusic").length;
-
-  document.getElementById("home-watch-count").textContent =
-    getSaved("nexusShows").length;
-}
-
-/* MUSIC SEARCH */
-
-async function searchMusic() {
-  const query = document.getElementById("music-search").value.trim();
-  const results = document.getElementById("music-results");
-
-  if (!query) {
-    results.innerHTML = '<div class="empty">Enter a song or artist name.</div>';
-    return;
-  }
-
-  results.innerHTML = '<div class="empty">Searching music...</div>';
-
-  try {
-    const response = await fetch(
-      "https://itunes.apple.com/search?term=" +
-      encodeURIComponent(query) +
-      "&entity=song&limit=20"
-    );
-
-    const data = await response.json();
-
-    if (!data.results?.length) {
-      results.innerHTML = '<div class="empty">No songs found.</div>';
-      return;
-    }
-
-    results.innerHTML = data.results.map(song => `
-      <div class="result-card">
-        <img src="${escapeHTML(song.artworkUrl100 || "")}" alt="Album artwork">
-        <h3>${escapeHTML(song.trackName || "Unknown song")}</h3>
-        <p>${escapeHTML(song.artistName || "Unknown artist")}</p>
-        <button class="action" data-add-song="${song.trackId}">＋ Add to library</button>
-      </div>
-    `).join("");
-
-    results.querySelectorAll("[data-add-song]").forEach(button => {
-      button.addEventListener("click", () => {
-        const song = data.results.find(item =>
-          String(item.trackId) === button.dataset.addSong
-        );
-        if (song) addSong(song);
-      });
-    });
-
-  } catch {
-    results.innerHTML = '<div class="empty">Music search failed. Try again.</div>';
-  }
-}
-
-function addSong(song) {
-  const library = getSaved("nexusMusic");
-
-  if (library.some(item => item.trackId === song.trackId)) {
-    alert("This song is already in your library.");
-    return;
-  }
-
-  library.push(song);
-  saveData("nexusMusic", library);
-  renderMusicLibrary();
-  updateDashboardCounts();
-}
+/* MUSIC LIBRARY */
 
 function renderMusicLibrary() {
-  const library = getSaved("nexusMusic");
   const container = document.getElementById("music-library");
+  const songs = getSaved("nexusMusic");
 
-  if (!library.length) {
+  if (!songs.length) {
     container.innerHTML = '<div class="empty">Your music library is empty.</div>';
     return;
   }
 
-  container.innerHTML = library.map(song => `
-    <div class="saved-item">
-      <img src="${escapeHTML(song.artworkUrl100 || "")}" alt="">
-      <div class="saved-info">
-        <h3>${escapeHTML(song.trackName || "Unknown song")}</h3>
-        <p>${escapeHTML(song.artistName || "Unknown artist")}</p>
-      </div>
-      <div class="saved-actions">
-        <button class="secondary" data-listen="${song.trackId}">Preview</button>
-        <button class="secondary" data-remove-song="${song.trackId}">Remove</button>
-      </div>
+  container.innerHTML = songs.map((song, index) => `
+    <div class="music-card">
+      <h3>${escapeHTML(song.title)}</h3>
+      <p>${escapeHTML(song.artist)}</p>
+      ${song.url ? `<audio controls src="${escapeHTML(song.url)}"></audio>` : ""}
+      <button class="secondary" data-remove-song="${index}">Remove</button>
     </div>
   `).join("");
 
   container.querySelectorAll("[data-remove-song]").forEach(button => {
     button.addEventListener("click", () => {
-      const updated = getSaved("nexusMusic").filter(
-        song => String(song.trackId) !== button.dataset.removeSong
-      );
+      const updated = getSaved("nexusMusic");
+      updated.splice(Number(button.dataset.removeSong), 1);
       saveData("nexusMusic", updated);
       renderMusicLibrary();
-      updateDashboardCounts();
-    });
-  });
-
-  container.querySelectorAll("[data-listen]").forEach(button => {
-    button.addEventListener("click", () => {
-      const song = library.find(
-        item => String(item.trackId) === button.dataset.listen
-      );
-
-      if (song?.previewUrl) window.open(song.previewUrl, "_blank");
-      else alert("No preview is available for this song.");
     });
   });
 }
 
-document.getElementById("music-search-btn").addEventListener("click", searchMusic);
-document.getElementById("music-search").addEventListener("keydown", event => {
-  if (event.key === "Enter") searchMusic();
+document.getElementById("add-song").addEventListener("click", () => {
+  const title = document.getElementById("music-title").value.trim();
+  const artist = document.getElementById("music-artist").value.trim();
+  const url = document.getElementById("music-url").value.trim();
+
+  if (!title) {
+    alert("Enter a song title.");
+    return;
+  }
+
+  const songs = getSaved("nexusMusic");
+  songs.push({title, artist, url});
+  saveData("nexusMusic", songs);
+
+  document.getElementById("music-title").value = "";
+  document.getElementById("music-artist").value = "";
+  document.getElementById("music-url").value = "";
+
+  renderMusicLibrary();
 });
 
-/* WATCHLIST SEARCH */
+/* WATCHLIST */
 
 async function searchShows() {
   const query = document.getElementById("show-search").value.trim();
   const results = document.getElementById("show-results");
 
-  if (!query) {
-    results.innerHTML = '<div class="empty">Enter a movie or show title.</div>';
-    return;
-  }
+  if (!query) return;
 
-  results.innerHTML = '<div class="empty">Searching movies and shows...</div>';
+  results.innerHTML = '<div class="empty">Searching...</div>';
 
   try {
-    const [movieResponse, showResponse] = await Promise.all([
-      fetch("https://itunes.apple.com/search?term=" +
-        encodeURIComponent(query) + "&entity=movie&limit=15"),
-      fetch("https://itunes.apple.com/search?term=" +
-        encodeURIComponent(query) + "&entity=tvEpisode&limit=15")
-    ]);
-
-    const movieData = await movieResponse.json();
-    const showData = await showResponse.json();
-
-    const combined = [
-      ...(movieData.results || []).map(item => ({
-        id: "movie-" + item.trackId,
-        title: item.trackName,
-        image: item.artworkUrl100,
-        kind: "Movie"
-      })),
-      ...(showData.results || []).map(item => ({
-        id: "show-" + item.collectionId,
-        title: item.collectionName || item.trackName,
-        image: item.artworkUrl100,
-        kind: "TV"
-      }))
-    ];
-
-    const unique = combined.filter((item, index, array) =>
-      item.title && array.findIndex(other => other.id === item.id) === index
+    const response = await fetch(
+      "https://api.tvmaze.com/search/shows?q=" + encodeURIComponent(query)
     );
 
-    if (!unique.length) {
-      results.innerHTML = '<div class="empty">No titles found.</div>';
+    if (!response.ok) throw new Error("Search failed");
+
+    const data = await response.json();
+
+    if (!data.length) {
+      results.innerHTML = '<div class="empty">No results found.</div>';
       return;
     }
 
-    results.innerHTML = unique.map(item => `
-      <div class="result-card">
-        <img src="${escapeHTML(item.image || "")}" alt="Poster">
-        <h3>${escapeHTML(item.title)}</h3>
-        <p>${item.kind}</p>
-        <button class="action" data-add-show="${escapeHTML(item.id)}">＋ Add to watchlist</button>
-      </div>
-    `).join("");
+    results.innerHTML = data.slice(0, 10).map(result => {
+      const show = result.show;
+
+      return `
+        <div class="show-card">
+          <h3>${escapeHTML(show.name)}</h3>
+          <p>${escapeHTML(show.type || "Show")}</p>
+          <p>${escapeHTML(show.summary || "No description available.")
+            .replace(/<[^>]*>/g, "")}</p>
+          <button class="action" data-add-show="${show.id}"
+            data-name="${escapeHTML(show.name)}">Add to watchlist</button>
+        </div>
+      `;
+    }).join("");
 
     results.querySelectorAll("[data-add-show]").forEach(button => {
       button.addEventListener("click", () => {
-        const item = unique.find(show => show.id === button.dataset.addShow);
-        if (item) addShow(item);
+        const shows = getSaved("nexusShows");
+
+        if (shows.some(show => show.id === button.dataset.addShow)) return;
+
+        shows.push({
+          id: button.dataset.addShow,
+          name: button.dataset.name,
+          status: "Plan to watch"
+        });
+
+        saveData("nexusShows", shows);
+        renderWatchlist();
       });
     });
 
   } catch {
-    results.innerHTML = '<div class="empty">Search failed. Please try again.</div>';
+    results.innerHTML = '<div class="empty">Search unavailable. Try again.</div>';
   }
-}
-
-function addShow(item) {
-  const watchlist = getSaved("nexusShows");
-
-  if (watchlist.some(show => show.id === item.id)) {
-    alert("This title is already in your watchlist.");
-    return;
-  }
-
-  watchlist.push({ ...item, status: "Want to watch" });
-  saveData("nexusShows", watchlist);
-  renderWatchlist();
-  updateDashboardCounts();
 }
 
 function renderWatchlist() {
-  const watchlist = getSaved("nexusShows");
-  const container = document.getElementById("watch-library");
+  const container = document.getElementById("watchlist");
   const filter = document.getElementById("watch-filter").value;
+  const shows = getSaved("nexusShows").filter(show =>
+    filter === "all" || show.status === filter
+  );
 
-  const filtered = filter === "All"
-    ? watchlist
-    : watchlist.filter(item => item.status === filter);
-
-  if (!filtered.length) {
-    container.innerHTML = '<div class="empty">Nothing here yet. Search for a title to add.</div>';
+  if (!shows.length) {
+    container.innerHTML = '<div class="empty">Nothing in this section yet.</div>';
     return;
   }
 
-  container.innerHTML = filtered.map(item => `
-    <div class="saved-item">
-      <img src="${escapeHTML(item.image || "")}" alt="">
-      <div class="saved-info">
-        <h3>${escapeHTML(item.title)}</h3>
-        <p>${escapeHTML(item.kind)}</p>
-        <div class="status">${escapeHTML(item.status)}</div>
-      </div>
-      <div class="saved-actions">
+  container.innerHTML = shows.map(item => `
+    <div class="show-card">
+      <h3>${escapeHTML(item.name)}</h3>
+      <div class="game-controls">
         <select data-status="${escapeHTML(item.id)}">
-          <option ${item.status === "Want to watch" ? "selected" : ""}>Want to watch</option>
+          <option ${item.status === "Plan to watch" ? "selected" : ""}>Plan to watch</option>
           <option ${item.status === "Watching" ? "selected" : ""}>Watching</option>
           <option ${item.status === "Finished" ? "selected" : ""}>Finished</option>
         </select>
@@ -1156,7 +967,7 @@ function renderWatchlist() {
     select.addEventListener("change", () => {
       const updated = getSaved("nexusShows").map(item =>
         item.id === select.dataset.status
-          ? { ...item, status: select.value }
+          ? {...item, status: select.value}
           : item
       );
       saveData("nexusShows", updated);
@@ -1171,7 +982,6 @@ function renderWatchlist() {
       );
       saveData("nexusShows", updated);
       renderWatchlist();
-      updateDashboardCounts();
     });
   });
 }
@@ -1245,9 +1055,1033 @@ function escapeHTML(value) {
   })[character]);
 }
 
+/* ARCADE */
+
+let activeArcadeGame = null;
+let snakeState = null;
+let snakeTimer = null;
+let chessGame = null;
+let chessMode = "two";
+let chessSelected = null;
+let chessLegalTargets = [];
+let tttState = [];
+let tttMode = "ai";
+let game2048State = null;
+let minesState = null;
+
+document.querySelectorAll("[data-game]").forEach(card => {
+  card.addEventListener("click", () => openArcadeGame(card.dataset.game));
+});
+
+document.getElementById("back-arcade").addEventListener("click", () => {
+  stopSnake();
+  activeArcadeGame = null;
+  document.getElementById("arcade-menu").style.display = "grid";
+  document.getElementById("arcade-game").style.display = "none";
+});
+
+function openArcadeGame(game) {
+  activeArcadeGame = game;
+  stopSnake();
+
+  document.getElementById("arcade-menu").style.display = "none";
+  document.getElementById("arcade-game").style.display = "block";
+
+  const root = document.getElementById("arcade-stage");
+
+  if (game === "snake") renderSnake(root);
+  if (game === "chess") renderChess(root);
+  if (game === "ttt") renderTTT(root);
+  if (game === "2048") render2048(root);
+  if (game === "mines") renderMines(root);
+}
+
+/* SNAKE */
+
+function renderSnake(root) {
+  root.innerHTML = `
+    <div class="game-shell">
+      <div class="game-top">
+        <h2>Snake</h2>
+        <div>Score: <strong id="snake-score">0</strong></div>
+      </div>
+      <div class="game-status" id="snake-status">Press Start to play.</div>
+      <div class="game-board-wrap">
+        <canvas class="snake-canvas" id="snake-board" width="400" height="400"></canvas>
+      </div>
+      <div class="game-controls">
+        <button class="action" id="snake-start">Start game</button>
+        <button class="secondary" id="snake-pause">Pause</button>
+      </div>
+      <p class="chess-note">Use arrow keys or WASD to move.</p>
+    </div>
+  `;
+
+  const best = Number(localStorage.getItem("nexusSnakeBest") || 0);
+
+  snakeState = {
+    body: [{x: 10, y: 10}, {x: 9, y: 10}, {x: 8, y: 10}],
+    dir: {x: 1, y: 0},
+    next: {x: 1, y: 0},
+    food: {x: 15, y: 10},
+    score: 0,
+    running: false,
+    over: false
+  };
+
+  document.getElementById("snake-start").addEventListener("click", startSnake);
+  document.getElementById("snake-pause").addEventListener("click", pauseSnake);
+
+  drawSnake();
+}
+
+function startSnake() {
+  if (!snakeState || snakeState.running) return;
+
+  if (snakeState.over) {
+    renderSnake(document.getElementById("arcade-stage"));
+  }
+
+  snakeState.running = true;
+  document.getElementById("snake-status").textContent = "Game running.";
+  document.getElementById("snake-start").textContent = "Restart";
+
+  snakeTimer = setInterval(tickSnake, 120);
+}
+
+function pauseSnake() {
+  if (!snakeState) return;
+
+  snakeState.running = false;
+  stopSnake();
+
+  document.getElementById("snake-status").textContent = "Paused.";
+}
+
+function stopSnake() {
+  if (snakeTimer) clearInterval(snakeTimer);
+  snakeTimer = null;
+
+  if (snakeState) snakeState.running = false;
+}
+
+function tickSnake() {
+  if (!snakeState?.running) return;
+
+  snakeState.dir = snakeState.next;
+
+  const head = {
+    x: snakeState.body[0].x + snakeState.dir.x,
+    y: snakeState.body[0].y + snakeState.dir.y
+  };
+
+  const eating =
+    head.x === snakeState.food.x &&
+    head.y === snakeState.food.y;
+
+  if (
+    head.x < 0 || head.y < 0 ||
+    head.x >= 20 || head.y >= 20 ||
+    snakeState.body.slice(0, eating ? undefined : -1)
+      .some(point => point.x === head.x && point.y === head.y)
+  ) {
+    snakeState.running = false;
+    snakeState.over = true;
+    stopSnake();
+
+    document.getElementById("snake-status").textContent =
+      "Game over. Score: " + snakeState.score;
+
+    document.getElementById("snake-start").textContent = "Play again";
+    return;
+  }
+
+  snakeState.body.unshift(head);
+
+  if (eating) {
+    snakeState.score += 10;
+    document.getElementById("snake-score").textContent = snakeState.score;
+
+    const best = Number(localStorage.getItem("nexusSnakeBest") || 0);
+
+    if (snakeState.score > best) {
+      localStorage.setItem("nexusSnakeBest", snakeState.score);
+    }
+
+    placeSnakeFood();
+  } else {
+    snakeState.body.pop();
+  }
+
+  drawSnake();
+}
+
+function placeSnakeFood() {
+  let point;
+
+  do {
+    point = {
+      x: Math.floor(Math.random() * 20),
+      y: Math.floor(Math.random() * 20)
+    };
+  } while (snakeState.body.some(part =>
+    part.x === point.x && part.y === point.y
+  ));
+
+  snakeState.food = point;
+}
+
+function drawSnake() {
+  const canvas = document.getElementById("snake-board");
+  if (!canvas || !snakeState) return;
+
+  const ctx = canvas.getContext("2d");
+  const size = 20;
+
+  ctx.clearRect(0, 0, 400, 400);
+  ctx.fillStyle = "#17111b";
+  ctx.fillRect(0, 0, 400, 400);
+
+  ctx.fillStyle = "#ff4fa3";
+  ctx.fillRect(
+    snakeState.food.x * size,
+    snakeState.food.y * size,
+    size - 2,
+    size - 2
+  );
+
+  snakeState.body.forEach((part, index) => {
+    ctx.fillStyle = index === 0 ? "#9bffd0" : "#55e6a5";
+    ctx.fillRect(part.x * size, part.y * size, size - 2, size - 2);
+  });
+}
+
+/* CHESS - LOCAL MULTIPLAYER OR COMPUTER OPPONENT */
+
+function loadChessLibrary() {
+  return new Promise((resolve, reject) => {
+    if (window.Chess) {
+      resolve();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js";
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+async function renderChess(root) {
+  root.innerHTML = `
+    <div class="game-shell">
+      <div class="game-top">
+        <h2>Chess</h2>
+        <button class="secondary" id="chess-reset">New game</button>
+      </div>
+
+      <div class="game-controls">
+        <button class="action" id="chess-ai">Play vs AI</button>
+        <button class="secondary" id="chess-two">Two players</button>
+      </div>
+
+      <div class="game-status" id="chess-status">Loading chess...</div>
+      <div class="game-board-wrap">
+        <div class="chess-board" id="chess-board"></div>
+      </div>
+
+      <p class="chess-note">
+        AI mode: you play White, computer plays Black.
+        Select a piece, then a highlighted square.
+      </p>
+    </div>
+  `;
+
+  try {
+    await loadChessLibrary();
+
+    if (activeArcadeGame !== "chess") return;
+
+    chessGame = new Chess();
+    chessMode = "ai";
+    chessSelected = null;
+    chessLegalTargets = [];
+
+    document.getElementById("chess-ai").addEventListener("click", () => {
+      chessMode = "ai";
+      chessGame.reset();
+      chessSelected = null;
+      chessLegalTargets = [];
+      drawChess();
+    });
+
+    document.getElementById("chess-two").addEventListener("click", () => {
+      chessMode = "two";
+      chessGame.reset();
+      chessSelected = null;
+      chessLegalTargets = [];
+      drawChess();
+    });
+
+    document.getElementById("chess-reset").addEventListener("click", () => {
+      chessGame.reset();
+      chessSelected = null;
+      chessLegalTargets = [];
+      drawChess();
+    });
+
+    drawChess();
+
+  } catch {
+    document.getElementById("chess-status").textContent =
+      "Chess engine could not load. Check your internet connection.";
+  }
+}
+
+function drawChess() {
+  const board = document.getElementById("chess-board");
+  if (!board || !chessGame) return;
+
+  const map = {
+    wp: "♙", wr: "♖", wn: "♘", wb: "♗", wq: "♕", wk: "♔",
+    bp: "♟", br: "♜", bn: "♞", bb: "♝", bq: "♛", bk: "♚"
+  };
+
+  const rows = chessGame.board();
+  board.innerHTML = "";
+
+  rows.forEach((row, r) => {
+    row.forEach((piece, c) => {
+      const square = "abcdefgh"[c] + (8 - r);
+      const button = document.createElement("button");
+
+      button.className =
+        "chess-square " +
+        ((r + c) % 2 ? "dark" : "light") +
+        (chessSelected === square ? " selected" : "") +
+        (chessLegalTargets.includes(square) ? " legal" : "");
+
+      button.textContent = piece ? map[piece.color + piece.type] : "";
+      button.setAttribute("aria-label", square);
+      button.addEventListener("click", () => clickChessSquare(square));
+
+      board.appendChild(button);
+    });
+  });
+
+  let status = chessGame.isCheckmate()
+    ? "Checkmate. " + (chessGame.turn() === "w" ? "Black" : "White") + " wins."
+    : chessGame.isDraw()
+      ? "Draw."
+      : (chessGame.turn() === "w" ? "White" : "Black") +
+        " to move." + (chessGame.inCheck() ? " Check!" : "");
+
+  if (chessMode === "ai" && !chessGame.game_over()) {
+    status += " You are White; AI is Black.";
+  }
+
+  document.getElementById("chess-status").textContent = status;
+  document.getElementById("chess-ai").classList.toggle("action", chessMode === "ai");
+  document.getElementById("chess-two").classList.toggle("action", chessMode === "two");
+}
+
+function clickChessSquare(square) {
+  if (
+    !chessGame ||
+    chessGame.game_over() ||
+    (chessMode === "ai" && chessGame.turn() === "b")
+  ) return;
+
+  const piece = chessGame.get(square);
+
+  if (chessSelected && chessLegalTargets.includes(square)) {
+    chessGame.move({
+      from: chessSelected,
+      to: square,
+      promotion: "q"
+    });
+
+    chessSelected = null;
+    chessLegalTargets = [];
+
+    drawChess();
+
+    if (chessMode === "ai" && !chessGame.game_over()) {
+      document.getElementById("chess-status").textContent =
+        "Computer is thinking...";
+      setTimeout(makeChessAIMove, 250);
+    }
+
+    return;
+  }
+
+  if (piece && piece.color === chessGame.turn()) {
+    chessSelected = square;
+    chessLegalTargets = chessGame.moves({
+      square: square,
+      verbose: true
+    }).map(move => move.to);
+  } else {
+    chessSelected = null;
+    chessLegalTargets = [];
+  }
+
+  drawChess();
+}
+
+/* CHESS AI */
+
+function makeChessAIMove() {
+  if (
+    activeArcadeGame !== "chess" ||
+    chessMode !== "ai" ||
+    !chessGame ||
+    chessGame.game_over() ||
+    chessGame.turn() !== "b"
+  ) return;
+
+  const moves = chessGame.moves({verbose: true});
+
+  if (!moves.length) return;
+
+  const scoredMoves = moves.map(move => {
+    let score = Math.random();
+
+    if (move.captured) {
+      const values = {
+        p: 10,
+        n: 30,
+        b: 30,
+        r: 50,
+        q: 90,
+        k: 900
+      };
+
+      score += values[move.captured] || 0;
+    }
+
+    if (move.san.includes("+")) score += 15;
+    if (move.san.includes("#")) score += 1000;
+
+    return {move, score};
+  });
+
+  scoredMoves.sort((a, b) => b.score - a.score);
+
+  chessGame.move(scoredMoves[0].move);
+  drawChess();
+}
+
+/* TIC-TAC-TOE - LOCAL MULTIPLAYER OR UNBEATABLE COMPUTER OPPONENT */
+
+function renderTTT(root) {
+  root.innerHTML = `
+    <div class="game-shell">
+      <div class="game-top">
+        <h2>Tic-tac-toe</h2>
+        <button class="secondary" id="ttt-reset">Restart</button>
+      </div>
+
+      <div class="game-controls">
+        <button class="action" id="ttt-ai">Play vs AI</button>
+        <button class="secondary" id="ttt-two">Two players</button>
+      </div>
+
+      <div class="game-status" id="ttt-status">Your turn. You are X.</div>
+
+      <div class="ttt-board" id="ttt-board">
+        ${Array.from({length: 9}, (_, i) =>
+          `<button class="ttt-cell" data-cell="${i}" aria-label="Cell ${i + 1}"></button>`
+        ).join("")}
+      </div>
+
+      <p class="chess-note">AI mode: you play X, computer plays O.</p>
+    </div>
+  `;
+
+  tttState = Array(9).fill("");
+  tttMode = "ai";
+
+  document.getElementById("ttt-ai").addEventListener("click", () => {
+    tttMode = "ai";
+    renderTTT(root);
+  });
+
+  document.getElementById("ttt-two").addEventListener("click", () => {
+    tttMode = "two";
+    tttState = Array(9).fill("");
+    drawTTT();
+  });
+
+  document.getElementById("ttt-reset").addEventListener("click", () => {
+    tttState = Array(9).fill("");
+    drawTTT();
+  });
+
+  document.querySelectorAll("[data-cell]").forEach(button => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.cell);
+
+      if (
+        tttState[index] ||
+        tttWinner() ||
+        tttState.every(Boolean) ||
+        (tttMode === "ai" && tttState.filter(Boolean).length % 2 === 1)
+      ) return;
+
+      tttState[index] = tttMode === "ai"
+        ? "X"
+        : (tttState.filter(Boolean).length % 2 === 0 ? "X" : "O");
+
+      drawTTT();
+
+      if (tttMode === "ai" && !tttWinner() && !tttState.every(Boolean)) {
+        document.getElementById("ttt-status").textContent =
+          "Computer is thinking...";
+        setTimeout(makeTTTAIMove, 250);
+      }
+    });
+  });
+
+  drawTTT();
+}
+
+function tttWinner() {
+  const wins = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+  ];
+
+  for (const line of wins) {
+    const [a, b, c] = line;
+
+    if (
+      tttState[a] &&
+      tttState[a] === tttState[b] &&
+      tttState[a] === tttState[c]
+    ) return tttState[a];
+  }
+
+  return null;
+}
+
+function drawTTT() {
+  const cells = document.querySelectorAll("[data-cell]");
+
+  cells.forEach((button, index) => {
+    button.textContent = tttState[index] || "";
+    button.classList.toggle("x", tttState[index] === "X");
+    button.classList.toggle("o", tttState[index] === "O");
+  });
+
+  const win = tttWinner();
+  const status = document.getElementById("ttt-status");
+
+  if (!status) return;
+
+  status.textContent = win
+    ? (tttMode === "ai"
+        ? (win === "X" ? "You win!" : "Computer wins!")
+        : win + " wins!")
+    : tttState.every(Boolean)
+      ? "It is a draw."
+      : tttMode === "ai"
+        ? (tttState.filter(Boolean).length % 2 === 0
+            ? "Your turn. You are X."
+            : "Computer turn.")
+        : ((tttState.filter(Boolean).length % 2 === 0 ? "X" : "O") + "'s turn.");
+
+  document.getElementById("ttt-ai").classList.toggle("action", tttMode === "ai");
+  document.getElementById("ttt-two").classList.toggle("action", tttMode === "two");
+}
+
+/* TIC-TAC-TOE AI - MINIMAX */
+
+function makeTTTAIMove() {
+  if (
+    activeArcadeGame !== "ttt" ||
+    tttMode !== "ai" ||
+    tttWinner() ||
+    tttState.every(Boolean)
+  ) return;
+
+  let bestScore = -Infinity;
+  let bestMove = null;
+
+  for (let i = 0; i < 9; i++) {
+    if (tttState[i] === "") {
+      tttState[i] = "O";
+
+      const score = minimaxTTT(tttState, 0, false);
+
+      tttState[i] = "";
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = i;
+      }
+    }
+  }
+
+  if (bestMove !== null) {
+    tttState[bestMove] = "O";
+    drawTTT();
+  }
+}
+
+function minimaxTTT(board, depth, isMaximizing) {
+  const winner = tttWinnerForBoard(board);
+
+  if (winner === "O") return 10 - depth;
+  if (winner === "X") return depth - 10;
+  if (board.every(Boolean)) return 0;
+
+  if (isMaximizing) {
+    let best = -Infinity;
+
+    for (let i = 0; i < 9; i++) {
+      if (!board[i]) {
+        board[i] = "O";
+        best = Math.max(best, minimaxTTT(board, depth + 1, false));
+        board[i] = "";
+      }
+    }
+
+    return best;
+  } else {
+    let best = Infinity;
+
+    for (let i = 0; i < 9; i++) {
+      if (!board[i]) {
+        board[i] = "X";
+        best = Math.min(best, minimaxTTT(board, depth + 1, true));
+        board[i] = "";
+      }
+    }
+
+    return best;
+  }
+}
+
+function tttWinnerForBoard(board) {
+  const wins = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+  ];
+
+  for (const [a, b, c] of wins) {
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a];
+    }
+  }
+
+  return null;
+}
+
+/* 2048 */
+
+function render2048(root) {
+  root.innerHTML = `
+    <div class="game-shell">
+      <div class="game-top">
+        <h2>2048</h2>
+        <div>
+          Score: <strong id="2048-score">0</strong> ·
+          Best: <strong id="2048-best">0</strong>
+        </div>
+      </div>
+
+      <div class="game-status" id="2048-status">
+        Combine matching tiles. Use arrow keys or swipe.
+      </div>
+
+      <div class="game-board-wrap">
+        <div class="game2048" id="2048-board"></div>
+      </div>
+
+      <div class="game-controls">
+        <button class="action" id="2048-reset">New game</button>
+      </div>
+
+      <p class="chess-note">Arrow keys / WASD · swipe on touchscreens</p>
+    </div>
+  `;
+
+  game2048State = {
+    grid: Array(16).fill(0),
+    score: 0,
+    over: false
+  };
+
+  const best = Number(localStorage.getItem("nexus2048Best") || 0);
+  document.getElementById("2048-best").textContent = best;
+
+  add2048Tile();
+  add2048Tile();
+  draw2048();
+
+  document.getElementById("2048-reset").addEventListener("click", () => {
+    render2048(root);
+  });
+}
+
+function add2048Tile() {
+  const empty = game2048State.grid
+    .map((value, index) => value === 0 ? index : -1)
+    .filter(index => index >= 0);
+
+  if (empty.length) {
+    game2048State.grid[empty[Math.floor(Math.random() * empty.length)]] =
+      Math.random() < .9 ? 2 : 4;
+  }
+}
+
+function draw2048() {
+  const board = document.getElementById("2048-board");
+  if (!board) return;
+
+  board.innerHTML = game2048State.grid.map(value =>
+    `<div class="tile2048 ${value ? (value <= 64 ? "v" + value : "big") : ""}">${value || ""}</div>`
+  ).join("");
+
+  document.getElementById("2048-score").textContent = game2048State.score;
+
+  let best = Number(localStorage.getItem("nexus2048Best") || 0);
+
+  if (game2048State.score > best) {
+    best = game2048State.score;
+    localStorage.setItem("nexus2048Best", best);
+  }
+
+  document.getElementById("2048-best").textContent = best;
+}
+
+function move2048(direction) {
+  if (
+    activeArcadeGame !== "2048" ||
+    !game2048State ||
+    game2048State.over
+  ) return;
+
+  const old = game2048State.grid.slice();
+  let gained = 0;
+
+  for (let line = 0; line < 4; line++) {
+    const indexes = Array.from({length: 4}, (_, i) =>
+      direction === "left" ? line * 4 + i :
+      direction === "right" ? line * 4 + 3 - i :
+      direction === "up" ? i * 4 + line :
+      (3 - i) * 4 + line
+    );
+
+    const values = indexes
+      .map(index => game2048State.grid[index])
+      .filter(Boolean);
+
+    for (let i = 0; i < values.length - 1; i++) {
+      if (values[i] === values[i + 1]) {
+        values[i] *= 2;
+        gained += values[i];
+        values.splice(i + 1, 1);
+      }
+    }
+
+    while (values.length < 4) values.push(0);
+
+    indexes.forEach((index, i) => {
+      game2048State.grid[index] = values[i];
+    });
+  }
+
+  if (old.some((value, i) => value !== game2048State.grid[i])) {
+    game2048State.score += gained;
+    add2048Tile();
+    draw2048();
+
+    if (game2048State.grid.includes(2048)) {
+      document.getElementById("2048-status").textContent =
+        "You reached 2048. Keep going!";
+    }
+
+    if (!canMove2048()) {
+      game2048State.over = true;
+      document.getElementById("2048-status").textContent =
+        "No more moves. Start a new game.";
+    }
+  }
+}
+
+function canMove2048() {
+  const grid = game2048State.grid;
+
+  if (grid.includes(0)) return true;
+
+  for (let row = 0; row < 4; row++) {
+    for (let col = 0; col < 4; col++) {
+      const index = row * 4 + col;
+
+      if (
+        (col < 3 && grid[index] === grid[index + 1]) ||
+        (row < 3 && grid[index] === grid[index + 4])
+      ) return true;
+    }
+  }
+
+  return false;
+}
+
+/* MINESWEEPER */
+
+function renderMines(root) {
+  root.innerHTML = `
+    <div class="game-shell">
+      <div class="game-top">
+        <h2>Minesweeper</h2>
+        <div>Mines: <strong id="mine-count">15</strong></div>
+      </div>
+
+      <div class="game-status" id="mine-status">
+        Reveal every safe square. Right-click to flag a mine.
+      </div>
+
+      <div class="game-board-wrap">
+        <div class="mine-board" id="mine-board"></div>
+      </div>
+
+      <div class="game-controls">
+        <button class="action" id="mine-reset">New game</button>
+      </div>
+
+      <p class="chess-note">Left-click to reveal · Right-click to flag</p>
+    </div>
+  `;
+
+  const total = 100;
+  const mineTotal = 15;
+
+  minesState = {
+    mines: new Set(),
+    opened: new Set(),
+    flags: new Set(),
+    ended: false
+  };
+
+  while (minesState.mines.size < mineTotal) {
+    minesState.mines.add(Math.floor(Math.random() * total));
+  }
+
+  const board = document.getElementById("mine-board");
+
+  for (let i = 0; i < total; i++) {
+    const button = document.createElement("button");
+    button.className = "mine-cell";
+    button.dataset.index = i;
+
+    button.addEventListener("click", () => revealMine(i));
+
+    button.addEventListener("contextmenu", event => {
+      event.preventDefault();
+      flagMine(i);
+    });
+
+    board.appendChild(button);
+  }
+
+  document.getElementById("mine-reset").addEventListener("click", () => {
+    renderMines(root);
+  });
+}
+
+function mineNeighbors(index) {
+  const row = Math.floor(index / 10);
+  const col = index % 10;
+  const output = [];
+
+  for (let dr = -1; dr <= 1; dr++) {
+    for (let dc = -1; dc <= 1; dc++) {
+      if (!dr && !dc) continue;
+
+      const nr = row + dr;
+      const nc = col + dc;
+
+      if (nr >= 0 && nr < 10 && nc >= 0 && nc < 10) {
+        output.push(nr * 10 + nc);
+      }
+    }
+  }
+
+  return output;
+}
+
+function revealMine(index) {
+  if (
+    !minesState ||
+    minesState.ended ||
+    minesState.opened.has(index) ||
+    minesState.flags.has(index)
+  ) return;
+
+  if (minesState.mines.has(index)) {
+    minesState.ended = true;
+
+    minesState.mines.forEach(mine => {
+      const button = document.querySelector(
+        `.mine-cell[data-index="${mine}"]`
+      );
+
+      if (button) {
+        button.textContent = "✹";
+        button.classList.add("open");
+      }
+    });
+
+    document.getElementById("mine-status").textContent =
+      "Boom. Game over. Start a new game.";
+
+    return;
+  }
+
+  openSafeMine(index);
+
+  if (minesState.opened.size === 85) {
+    minesState.ended = true;
+    document.getElementById("mine-status").textContent =
+      "You cleared the board. You win!";
+  }
+}
+
+function openSafeMine(index) {
+  if (
+    minesState.opened.has(index) ||
+    minesState.mines.has(index)
+  ) return;
+
+  minesState.opened.add(index);
+
+  const button = document.querySelector(
+    `.mine-cell[data-index="${index}"]`
+  );
+
+  if (!button) return;
+
+  button.classList.add("open");
+
+  const count = mineNeighbors(index)
+    .filter(neighbor => minesState.mines.has(neighbor)).length;
+
+  if (count) {
+    button.textContent = count;
+    button.style.color =
+      ["", "#69b8ff", "#6be0a1", "#ff8a8a", "#c49aff", "#ffbd68"][count]
+      || "white";
+  } else {
+    button.textContent = "";
+    mineNeighbors(index).forEach(openSafeMine);
+  }
+}
+
+function flagMine(index) {
+  if (
+    !minesState ||
+    minesState.ended ||
+    minesState.opened.has(index)
+  ) return;
+
+  const button = document.querySelector(
+    `.mine-cell[data-index="${index}"]`
+  );
+
+  if (minesState.flags.has(index)) {
+    minesState.flags.delete(index);
+    button.textContent = "";
+    button.classList.remove("flag");
+  } else {
+    minesState.flags.add(index);
+    button.textContent = "⚑";
+    button.classList.add("flag");
+  }
+
+  document.getElementById("mine-count").textContent =
+    15 - minesState.flags.size;
+}
+
+/* ARCADE KEYBOARD CONTROLS */
+
+document.addEventListener("keydown", event => {
+  if (!activeArcadeGame) return;
+
+  const tag = document.activeElement?.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+  const key = event.key.toLowerCase();
+
+  if (activeArcadeGame === "snake" && snakeState?.running) {
+    const directions = {
+      arrowup: [0, -1], w: [0, -1],
+      arrowdown: [0, 1], s: [0, 1],
+      arrowleft: [-1, 0], a: [-1, 0],
+      arrowright: [1, 0], d: [1, 0]
+    };
+
+    if (directions[key]) {
+      event.preventDefault();
+
+      const [x, y] = directions[key];
+
+      if (x !== -snakeState.dir.x || y !== -snakeState.dir.y) {
+        snakeState.next = {x, y};
+      }
+    }
+  }
+
+  if (activeArcadeGame === "2048") {
+    const directions = {
+      arrowleft: "left", a: "left",
+      arrowright: "right", d: "right",
+      arrowup: "up", w: "up",
+      arrowdown: "down", s: "down"
+    };
+
+    if (directions[key]) {
+      event.preventDefault();
+      move2048(directions[key]);
+    }
+  }
+});
+
+let touchStart2048 = null;
+
+document.addEventListener("touchstart", event => {
+  if (activeArcadeGame === "2048") {
+    touchStart2048 = {
+      x: event.changedTouches[0].clientX,
+      y: event.changedTouches[0].clientY
+    };
+  }
+}, {passive: true});
+
+document.addEventListener("touchend", event => {
+  if (activeArcadeGame !== "2048" || !touchStart2048) return;
+
+  const dx = event.changedTouches[0].clientX - touchStart2048.x;
+  const dy = event.changedTouches[0].clientY - touchStart2048.y;
+
+  if (Math.max(Math.abs(dx), Math.abs(dy)) > 25) {
+    move2048(
+      Math.abs(dx) > Math.abs(dy)
+        ? (dx > 0 ? "right" : "left")
+        : (dy > 0 ? "down" : "up")
+    );
+  }
+
+  touchStart2048 = null;
+});
+
 /* INITIALIZE */
 
-updateDashboardCounts();
 renderMusicLibrary();
 renderWatchlist();
 </script>
